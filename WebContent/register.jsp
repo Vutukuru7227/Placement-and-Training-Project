@@ -16,7 +16,7 @@
 		<div class="row">
 			<div class="panel panel-primary">
 				<div class="panel-body">
-					<form action="registration" method="POST" role="form">
+					<form action="UserController" method="registration" role="form">
 						<div class="form-group">
 							<h3>Create account</h3>
 						</div>

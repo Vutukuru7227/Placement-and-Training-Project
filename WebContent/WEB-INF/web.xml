@@ -1,12 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<element>
+
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
   <display-name>JobPortal</display-name>
+  <!-- Added to begin the application at Login  -->
+  <welcome-file-list>
+  	<welcome-file>login.jsp</welcome-file>
+  </welcome-file-list>
+  
   <servlet>
     <servlet-name>register</servlet-name>
     <servlet-class>registration</servlet-class>
   </servlet>
+  
   <servlet-mapping>
     <servlet-name>register</servlet-name>
     <url-pattern>/registerServlet</url-pattern>
   </servlet-mapping>
 </web-app>
+</element>
