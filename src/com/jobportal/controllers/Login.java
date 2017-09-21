@@ -1,4 +1,4 @@
-package controllers;
+package com.jobportal.controllers;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import services.LoginService;
+import com.jobportal.services.LoginService;
 
 import static java.lang.System.*;
 
@@ -43,7 +43,7 @@ public class Login extends HttpServlet {
 			
 			if(result) {
 				request.setAttribute("email_id", email_id);
-				RequestDispatcher dispatcher = request.getRequestDispatcher("success.jsp");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("profile.jsp");
 				dispatcher.include(request, response);
 			}
 			else{

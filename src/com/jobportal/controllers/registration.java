@@ -1,4 +1,4 @@
-package controllers;
+package com.jobportal.controllers;
 
 import java.io.IOException;
 import java.io.PrintWriter;

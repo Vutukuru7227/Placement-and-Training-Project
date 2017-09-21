@@ -1,4 +1,4 @@
-package services;
+package com.jobportal.services;
 
 import static java.lang.System.out;
 
@@ -7,7 +7,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-import repository.*;
+import com.jobportal.repository.*;
 
 public class LoginService implements ILogin{
 	

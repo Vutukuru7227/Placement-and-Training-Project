@@ -1,4 +1,4 @@
-package models;
+package com.jobportal.models;
 
 public class RegistrationModel {
 

@@ -1,6 +1,6 @@
-package repository;
+package com.jobportal.repository;
 
-import models.RegistrationModel;
+import com.jobportal.models.RegistrationModel;
 
 public interface ILogin {
 
