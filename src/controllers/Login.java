@@ -43,7 +43,7 @@ public class Login extends HttpServlet {
 			
 			if(result) {
 				request.setAttribute("email_id", email_id);
-				RequestDispatcher dispatcher = request.getRequestDispatcher("profile.jsp");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("user.jsp");
 				dispatcher.include(request, response);
 			}
 			else{
