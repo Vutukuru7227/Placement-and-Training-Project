@@ -1,4 +1,9 @@
+<<<<<<< HEAD
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+=======
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+>>>>>>> aef003348305482c2d08053549155a59119b7a7f
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -78,6 +83,7 @@
         <div class="panel-body">
           <form id="register_form" action="registration" method="POST" role="form">
             <div class="form-group">
+<<<<<<< HEAD
               <h3 style="text-align: center;">Create your account</h3>
             </div>
             <div class="form-group">
@@ -104,11 +110,37 @@
             <label class="control-label" for="signupPassword">You are an</label>
             <input id="member_type" type="radio" name="member_type" value="0" required> Applicant
             <input id="member_type" type="radio" name="member_type" value="1" required> Employer
+=======
+              <h3 style="text-align: center;">Create your account</h3><hr>
+            </div>
+            <div class="form-group">
+              <label class="control-label" for="firstname">First name</label>
+              <input id="firstname" name="firstname" type="text" maxlength="50" class="form-control" required="">
+            </div>
+            <div class="form-group">
+              <label class="control-label" for="lastname">Last name</label>
+              <input id="lastname" name="lastname" type="text" maxlength="50" class="form-control" required="">
+            </div>
+            <div class="form-group">
+              <label class="control-label" for="signupEmail">Email</label>
+              <input id="signupEmail" name="signupEmail" type="email" maxlength="50" class="form-control" required="">
+            </div>
+            <div class="form-group">
+              <label class="control-label" for="signupPassword">Password</label>
+              <input id="signupPassword" name="signupPassword" type="password" minlength="6" maxlength="25" class="form-control" placeholder="at least 6 characters" length="40" required="">
+            </div>
+            <div class="form-group">
+              <label class="control-label" for="signupPasswordagain">Password again</label>
+              <input id="signupPasswordagain" name="signupPasswordagain" type="password" minlength="6" maxlength="25" class="form-control" required="">
+>>>>>>> aef003348305482c2d08053549155a59119b7a7f
             </div>
             <div class="form-group">
               <input id="signupSubmit" type="submit" name="submit" value="Create your account" class="btn btn-info btn-block">
             </div>
+<<<<<<< HEAD
             
+=======
+>>>>>>> aef003348305482c2d08053549155a59119b7a7f
           </form>
           </div>
           </div>
@@ -122,7 +154,11 @@
 <div class="copyright" style="min-height:40px; background-color:#000000;">
   <div class="container">
     <div class="col-md-6">
+<<<<<<< HEAD
       <p style="text-align:left; color:#FFF; padding:10px 0; margin-bottom:0px;">&copy; 2017 - All Rights reserved with Team-5 OOAD Group</p>
+=======
+      <p style="text-align:left; color:#FFF; padding:10px 0; margin-bottom:0px;">Â© 2017 - All Rights reserved with Team-5 OOAD Group</p>
+>>>>>>> aef003348305482c2d08053549155a59119b7a7f
     </div>
     <div class="col-md-6">
       <ul class="bottom_ul">
