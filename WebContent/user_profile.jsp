@@ -127,15 +127,6 @@
           <label>Address</label><br>
           <input type="text" name="" id="" placeholder="Street/Apt No."><br>
 
-<<<<<<< HEAD
-=======
-          <label>City</label><br>
-          <input type="text" name="" id=""><br>
-
-          <label>State</label><br>
-          <input type="text" name="" id=""><br>
-
->>>>>>> aef003348305482c2d08053549155a59119b7a7f
           <label>Zipcode</label><br>
           <input type="text" name="" id=""><br>
 
@@ -354,11 +345,7 @@
 <div class="container">
   <table class="table table-bordered table-condensed" align="center" style="background-color: white; max-width: 800px">
     <tr>
-<<<<<<< HEAD
       <th>Skills<span style="float: right;">
-=======
-      <th>Technical Skills<span style="float: right;">
->>>>>>> aef003348305482c2d08053549155a59119b7a7f
         <button type="button" class="btn btn-default glyphicon glyphicon-plus-sign" data-toggle="modal" data-target="#addSkillsModal">
         </button>
       </span></th>
@@ -381,18 +368,13 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-<<<<<<< HEAD
         <h5 class="modal-title" id="exampleModalLabel"><b>Add Skill</b></h5>
-=======
-        <h5 class="modal-title" id="exampleModalLabel"><b>Add Technical Skill</b></h5>
->>>>>>> aef003348305482c2d08053549155a59119b7a7f
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
         <form id="" method="POST" action="">
-<<<<<<< HEAD
           <label>Skill Category</label><br>
           <select>
   			<option value="Programming">Programming</option>
@@ -401,8 +383,6 @@
   			<option value="Protocols">Protocols</option>
  			<option value="Others">Others</option>
 		</select><br>
-=======
->>>>>>> aef003348305482c2d08053549155a59119b7a7f
           <label>Skill</label><br>
           <input type="text" name="" id="" placeholder="Ex:- Java">
 

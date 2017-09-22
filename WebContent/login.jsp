@@ -28,7 +28,7 @@
         rgba(38, 38, 38, 0.1));
                 color:#ffffff;
             }
-          #register_form{
+          #login_form{
             margin: 0px 10px;
             color: black;
             margin-top: 0px;
@@ -39,20 +39,7 @@
         .bottom_ul li:after { content:"/"; color:#FFF; margin-right:8px; margin-left:8px;}
         .bottom_ul li a { color:#FFF;  font-size:12px;}
     </style>
-    <script type="text/javascript">
-    function match_password(){  
-    	var firstpassword = document.register_form.signupPassword.value;  
-    	var secondpassword = document.register_form.signupPasswordagain.value;  
-    	  
-    	if(firstpassword == secondpassword){  
-    	return true;  
-    	}  
-    	else{  
-    	alert("Passwords must be same!");  
-    	return false;  
-    	}  
-    	}  
-    </script>
+    
     <link href="https://fonts.googleapis.com/css?family=Oxygen" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
@@ -71,18 +58,6 @@
       </button>
       <a class="navbar-brand" href="#" style="color: white">SYNTHESIZE</a>
     </div>
-
-                <form class="navbar-form navbar-right" method="POST" action="Login">
-                    <div class="form-group">
-                        <input type="email" class="form-control" id="signinEmail" name="signinEmail" placeholder="Email" required>
-                    </div>
-                    <div class="form-group">
-                        <input type="password" class="form-control" id="signinPassword" name="signinPassword" placeholder="Password" required>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Sign In</button>
-                    <a href="#" style="color: white;">Forgot Password?</a>
-                </form>
-    
   </div><!-- /.container-fluid -->
 </nav>
 
@@ -90,37 +65,21 @@
 <div class="container" style="max-width: 360px;">
 <div class="panel panel-primary">
         <div class="panel-body">
-          <form id="register_form" name="register_form" action="registration" method="POST" role="form" onsubmit="return match_password()">
+          <form id="login_form" name="login_form" action="Login" method="POST" role="form">
             <div class="form-group">
-              <h3 style="text-align: center;">Create your account</h3>
+              <h3 style="text-align: center;">Login to your account</h3><hr>
             </div>
             <div class="form-group">
-              <label class="control-label" for="firstname">First name</label>
-              <input id="firstname" name="firstname" type="text" maxlength="50" class="form-control" required>
+              <label class="control-label" for="signinEmail">Email</label>
+              <input id="signinEmail" name="signinEmail" type="email" maxlength="50" class="form-control" required>
             </div>
             <div class="form-group">
-              <label class="control-label" for="lastname">Last name</label>
-              <input id="lastname" name="lastname" type="text" maxlength="50" class="form-control" required>
+              <label class="control-label" for="signinPassword">Password</label>
+              <input id="signinPassword" name="signinPassword" type="password" class="form-control" required>
             </div>
+          
             <div class="form-group">
-              <label class="control-label" for="signupEmail">Email</label>
-              <input id="signupEmail" name="signupEmail" type="email" maxlength="50" class="form-control" required>
-            </div>
-            <div class="form-group">
-              <label class="control-label" for="signupPassword">Password</label>
-              <input id="signupPassword" name="signupPassword" type="password" minlength="6" maxlength="25" class="form-control" placeholder="at least 6 characters" length="40" required>
-            </div>
-            <div class="form-group">
-              <label class="control-label" for="signupPasswordagain">Password again</label>
-              <input id="signupPasswordagain" name="signupPasswordagain" type="password" minlength="6" maxlength="25" class="form-control" required>
-            </div>
-            <div class="form-group">
-            <label class="control-label" for="signupPassword">You are an</label>
-            <input id="member_type" type="radio" name="member_type" value="0" required> Applicant
-            <input id="member_type" type="radio" name="member_type" value="1" required> Employer
-            </div>
-            <div class="form-group">
-              <input id="signupSubmit" type="submit" name="submit" value="Create your account" class="btn btn-info btn-block">
+              <input id="signinSubmit" type="submit" name="submit" value="Login" class="btn btn-info btn-block">
             </div>
             
           </form>
