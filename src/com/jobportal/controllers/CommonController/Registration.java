@@ -1,11 +1,8 @@
-package com.jobportal.controllers;
+package com.jobportal.controllers.CommonController;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,17 +10,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.jobportal.models.RegistrationModel;
+import com.jobportal.services.common.RegistrationService;
+
 /**
  * Servlet implementation class registration
  */
-@WebServlet("/registration")
-public class registration extends HttpServlet {
+@WebServlet("/Registration")
+public class Registration extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public registration() {
+    public Registration() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -42,30 +42,28 @@ public class registration extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		try {
+			RegistrationModel registerationModel = new RegistrationModel();
+			
+			
 			String firstname = request.getParameter("firstname");
 			String lastname = request.getParameter("lastname");
-			String email = request.getParameter("signupEmail");
+			String email_id = request.getParameter("signupEmail");
 			String password = request.getParameter("signupPassword");
 			
-			String sql = "insert into registration(email_id, first_name, last_name, password) values(?, ?, ?, ?)";
+			registerationModel.setFirst_name(firstname);
+			registerationModel.setLast_name(lastname);
+			registerationModel.setEmail_id(email_id);
+			registerationModel.setPassword(password);
 			
-			Class.forName("com.mysql.jdbc.Driver");
-			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/placement", "root", "");
-		
-			PreparedStatement ps = con.prepareStatement(sql);
+			RegistrationService registrationService = new RegistrationService();
+			boolean result = registrationService.registerUser(registerationModel);
 			
-			ps.setString(1, email);
-			ps.setString(2, firstname);
-			ps.setString(3, lastname);
-			ps.setString(4, password);
-			ps.executeUpdate();
-			PrintWriter out = response.getWriter();
-			out.println("You have been successfully registered");
+			if(result) {
+				PrintWriter out = response.getWriter();
+				out.println("You have been successfully registered");
+			}
 			
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

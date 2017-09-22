@@ -3,6 +3,36 @@ package com.jobportal.models;
 public class RegistrationModel {
 
 	private String email_id;
+	private String first_name;
+	private String last_name;
+	private String password;
+	
+	/**
+	 * @return the admin_status
+	 */
+	public String getAdmin_status() {
+		return admin_status;
+	}
+	/**
+	 * @param admin_status the admin_status to set
+	 */
+	public void setAdmin_status(String admin_status) {
+		this.admin_status = admin_status;
+	}
+	/**
+	 * @return the memeber_type
+	 */
+	public String getMemeber_type() {
+		return memeber_type;
+	}
+	/**
+	 * @param memeber_type the memeber_type to set
+	 */
+	public void setMemeber_type(String memeber_type) {
+		this.memeber_type = memeber_type;
+	}
+	private String admin_status;
+	private String memeber_type;
 	/**
 	 * @return the email_id
 	 */
@@ -51,22 +81,8 @@ public class RegistrationModel {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	/**
-	 * @return the member_type
-	 */
-	public String getMember_type() {
-		return member_type;
-	}
-	/**
-	 * @param member_type the member_type to set
-	 */
-	public void setMember_type(String member_type) {
-		this.member_type = member_type;
-	}
-	private String first_name;
-	private String last_name;
-	private String password;
-	private String member_type;
+
+
 	
 	
 	

@@ -77,7 +77,7 @@
 <div class="container" style="max-width: 360px;">
 <div class="panel panel-primary">
         <div class="panel-body">
-          <form id="register_form" action="registration" method="POST" role="form">
+          <form id="register_form" action="Registration" method="POST" role="form">
             <div class="form-group">
               <h3 style="text-align: center;">Create your account</h3><hr>
             </div>

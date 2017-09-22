@@ -1,4 +1,4 @@
-package com.jobportal.services;
+package com.jobportal.services.common;
 
 import static java.lang.System.out;
 
@@ -7,6 +7,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import com.jobportal.models.RegistrationModel;
 import com.jobportal.repository.*;
 
 public class LoginService implements ILogin{
@@ -32,13 +33,17 @@ public class LoginService implements ILogin{
 	}
 
 	@Override
-	public boolean authenticateUser(String email_id, String password) {
+	public boolean authenticateUser(RegistrationModel loginModel) {
 		boolean result = false;
 		String dbEmail_id = "";
 		String dbPassword = "";
 		
 		try {
-			String sql = "select * from registration where email_id=? and password=?";
+			
+			String email_id = loginModel.getEmail_id();
+			String password = loginModel.getPassword();
+			
+			String sql = "select email_id, password from registration where email_id=? and password=?";
 			
 			PreparedStatement ps = getConnection().prepareStatement(sql);
 			
@@ -48,7 +53,7 @@ public class LoginService implements ILogin{
 			
 			while(rs.next()){
 				dbEmail_id = rs.getString(1);
-				dbPassword = rs.getString(4);
+				dbPassword = rs.getString(2);
 			}
 			if((dbEmail_id.equals(email_id)) && (dbPassword.equals(password))) {
 				return true;

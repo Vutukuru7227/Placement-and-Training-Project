@@ -1,4 +1,4 @@
-package com.jobportal.controllers;
+package com.jobportal.controllers.CommonController;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -15,7 +15,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.jobportal.services.LoginService;
+import com.jobportal.models.RegistrationModel;
+import com.jobportal.services.common.LoginService;
 
 import static java.lang.System.*;
 
@@ -38,8 +39,12 @@ public class Login extends HttpServlet {
 			String email_id = request.getParameter("signinEmail");
 			String password = request.getParameter("signinPassword");
 			
+			RegistrationModel loginModel = new RegistrationModel();
+			loginModel.setEmail_id(email_id);
+			loginModel.setPassword(password);
+			
 			LoginService loginService = new LoginService();
-			boolean result = loginService.authenticateUser(email_id,password);
+			boolean result = loginService.authenticateUser(loginModel);
 			
 			if(result) {
 				request.setAttribute("email_id", email_id);
