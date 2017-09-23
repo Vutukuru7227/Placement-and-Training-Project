@@ -1,8 +1,7 @@
 package com.jobportal.controllers.CommonController;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-
+import static java.lang.System.out;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -49,11 +48,22 @@ public class Registration extends HttpServlet {
 			String lastname = request.getParameter("lastname");
 			String email_id = request.getParameter("signupEmail");
 			String password = request.getParameter("signupPassword");
+			String member_type = request.getParameter("member_type");
+			String type = "";
+			
+			if(member_type.equals("0")) {
+				type = "Applicant";
+			}
+			else {
+				type = "Employer";
+			}
 			
 			registerationModel.setFirst_name(firstname);
 			registerationModel.setLast_name(lastname);
 			registerationModel.setEmail_id(email_id);
 			registerationModel.setPassword(password);
+			registerationModel.setMember_type(type);
+			
 			
 			RegistrationService registrationService = new RegistrationService();
 			boolean result = registrationService.registerUser(registerationModel);

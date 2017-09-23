@@ -91,17 +91,19 @@
 <!-- Job posting form-->
 <div id="job_posting">
 
-        <form id="posting" method="POST" action="">
+        <form id="posting" method="POST" action="JobPosting">
           <label>Job Title</label><br>
           <input type="text" name="job_title" id="job_title" size="60px" ><br>
           <br>
           <label>Job Description</label><br>
-            <textarea name="job_desc" id="job_desc" rows="4" cols="62"></textarea><br>
+            <textarea name="job_description" id="job_description" rows="4" cols="62"></textarea><br>
           <br>
           <label>Deadline for application</label><br>
-          <input type="text" name="appli_dead" id="appli_dead" placeholder="mm/dd/yyyy" ><br>
+          <input type="text" name="application_deadline" id="application_deadline" placeholder="YYYY-MM-DD" ><br>
+          <br>
+          <button name="submit" type="submit" class="btn btn-primary">Submit</button>
         </form>
-        <button type="button" class="btn btn-primary">Submit</button>
+
 </div>
 
 

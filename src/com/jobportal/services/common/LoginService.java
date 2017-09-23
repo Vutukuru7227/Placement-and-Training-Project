@@ -35,9 +35,11 @@ public class LoginService implements ILogin{
 	@Override
 	public RegistrationModel authenticateUser(RegistrationModel loginModel) {
 		String dbEmailId = "";
-		String dbfirstName = "";
-		String dblastName = "";
+		String dbFirstName = "";
+		String dbLastName = "";
 		String dbPassword = "";
+		String dbAdmin_status = "";
+		String dbMember_type = "";
 		try {
 			
 			String email_id = loginModel.getEmail_id();
@@ -62,18 +64,20 @@ public class LoginService implements ILogin{
 				
 				while(rsUser.next()) {
 					dbEmailId = rsUser.getString(1);
-					dbfirstName = rsUser.getString(2);
-					dblastName = rsUser.getString(3);
+					dbFirstName = rsUser.getString(2);
+					dbLastName = rsUser.getString(3);
 					dbPassword = rsUser.getString(4);
-					
+					dbAdmin_status = rsUser.getString(5);
+					dbMember_type = rsUser.getString(6);
 				}
 
 				RegistrationModel userDetailsModel = new RegistrationModel();
-				userDetailsModel.setFirst_name(dbfirstName);
-				out.println(dblastName);
-				userDetailsModel.setLast_name(dblastName);
+				userDetailsModel.setFirst_name(dbFirstName);
+				userDetailsModel.setLast_name(dbLastName);
 				userDetailsModel.setEmail_id(dbEmailId);
 				userDetailsModel.setPassword(dbPassword);
+				userDetailsModel.setAdmin_status(dbAdmin_status);
+				userDetailsModel.setMember_type(dbMember_type);
 				
 				return userDetailsModel;
 				

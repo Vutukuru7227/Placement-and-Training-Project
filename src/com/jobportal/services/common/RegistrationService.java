@@ -37,9 +37,11 @@ public class RegistrationService {
 		String password = registrationModel.getPassword();
 		String firstName = registrationModel.getFirst_name();
 		String lastName = registrationModel.getLast_name();
+		String admin_status = "0";
+		String member_type = registrationModel.getMember_type();
 		
 		String sql = "insert into registration"
-				+ "(email_id, first_name, last_name, password) values(?,?,?,?)";
+				+ "(email_id, first_name, last_name, password, admin_status, member_type) values(?,?,?,?,?,?)";
 		
 		try {
 			Connection connection = getConnection();
@@ -49,14 +51,15 @@ public class RegistrationService {
 			ps.setString(2, firstName);
 			ps.setString(3, lastName);
 			ps.setString(4, password);
+			ps.setString(5, admin_status);
+			ps.setString(6, member_type);
 			
 			ps.executeUpdate();
 			result = true;
 		} catch (Exception e) {
 			e.printStackTrace();
 			result = false;
-		}
-		
+		}	
 		return result;
 	}
 

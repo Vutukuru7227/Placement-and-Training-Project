@@ -1,7 +1,6 @@
 package com.jobportal.controllers.CommonController;
 
 import java.io.IOException;
-import javax.servlet.http.HttpSession;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.jobportal.models.RegistrationModel;
 import com.jobportal.services.common.LoginService;
@@ -42,14 +42,21 @@ public class Login extends HttpServlet {
 			LoginService loginService = new LoginService();
 			 result = loginService.authenticateUser(loginModel);
 			
-			out.print(result.getEmail_id());
 			
 			if(result != null) {
-				//HttpSession session = request.getSession();
-				request.setAttribute("username", result.getFirst_name() + " "+result.getLast_name());
-				request.setAttribute("email_id", email_id);
-				RequestDispatcher dispatcher = request.getRequestDispatcher("profile.jsp");
-				dispatcher.include(request, response);
+				HttpSession session = request.getSession();
+				session.setAttribute("email_id", result.getEmail_id());
+				session.setAttribute("username", result.getFirst_name()+" "+result.getLast_name());
+
+				if(result.getMember_type().equals("Applicant")) {
+					RequestDispatcher dispatcher = request.getRequestDispatcher("user_home_page.jsp");
+					dispatcher.include(request, response);
+				}
+				else {
+					RequestDispatcher dispatcher = request.getRequestDispatcher("employer_home_page.jsp");
+					dispatcher.include(request, response);
+				}
+
 			}	
 		}
 		catch (Exception e) {

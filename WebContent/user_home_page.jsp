@@ -66,13 +66,13 @@
 
 
 	<%
-		String username = (String) request.getAttribute("email_id");
+		String username = (String) session.getAttribute("username");
 	%>
 
 <div class="jumbotron">
   <h2 class="text-center">Hello <%=username%>!</h2>
   <p class="text-center">Welcome to Training and Placement Job Portal site</p>
-  <p class="text-center"><a class="btn btn-primary btn-lg" href="job_posting_screen" role="button">Post a New Job!</a></p>
+  <p class="text-center"><a class="btn btn-primary btn-lg" href="user_profile.html" role="button">Learn more by creating your profile page!</a></p>
 </div>
 
 
