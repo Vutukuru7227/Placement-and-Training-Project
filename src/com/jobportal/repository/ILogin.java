@@ -4,5 +4,6 @@ import com.jobportal.models.RegistrationModel;
 
 public interface ILogin {
 
-	public boolean authenticateUser(RegistrationModel loginModel);
+	public RegistrationModel authenticateUser(RegistrationModel loginModel);
+	
 }

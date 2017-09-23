@@ -1,12 +1,7 @@
 package com.jobportal.controllers.CommonController;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import javax.servlet.http.HttpSession;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -35,6 +30,7 @@ public class Login extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		RegistrationModel result;
 		try {
 			String email_id = request.getParameter("signinEmail");
 			String password = request.getParameter("signinPassword");
@@ -44,16 +40,16 @@ public class Login extends HttpServlet {
 			loginModel.setPassword(password);
 			
 			LoginService loginService = new LoginService();
-			boolean result = loginService.authenticateUser(loginModel);
+			 result = loginService.authenticateUser(loginModel);
 			
-			if(result) {
+			out.print(result.getEmail_id());
+			
+			if(result != null) {
+				//HttpSession session = request.getSession();
+				request.setAttribute("username", result.getFirst_name() + " "+result.getLast_name());
 				request.setAttribute("email_id", email_id);
 				RequestDispatcher dispatcher = request.getRequestDispatcher("profile.jsp");
 				dispatcher.include(request, response);
-			}
-			else{
-				// Redirection
-				return;
 			}	
 		}
 		catch (Exception e) {

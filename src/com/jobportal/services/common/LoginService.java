@@ -33,17 +33,17 @@ public class LoginService implements ILogin{
 	}
 
 	@Override
-	public boolean authenticateUser(RegistrationModel loginModel) {
-		boolean result = false;
-		String dbEmail_id = "";
+	public RegistrationModel authenticateUser(RegistrationModel loginModel) {
+		String dbEmailId = "";
+		String dbfirstName = "";
+		String dblastName = "";
 		String dbPassword = "";
-		
 		try {
 			
 			String email_id = loginModel.getEmail_id();
 			String password = loginModel.getPassword();
 			
-			String sql = "select email_id, password from registration where email_id=? and password=?";
+			String sql = "(select 1 from registration where email_id=? and password=?)";
 			
 			PreparedStatement ps = getConnection().prepareStatement(sql);
 			
@@ -51,19 +51,40 @@ public class LoginService implements ILogin{
 			ps.setString(2, password);
 			ResultSet rs = ps.executeQuery();
 			
-			while(rs.next()){
-				dbEmail_id = rs.getString(1);
-				dbPassword = rs.getString(2);
+			
+			while(rs.next()) {
+				String userDetails = "select * from registration where email_id=? and password=?";
+				PreparedStatement psUser = getConnection().prepareStatement(userDetails);
+				psUser.setString(1, email_id);
+				psUser.setString(2, password);
+				
+				ResultSet rsUser = psUser.executeQuery();
+				
+				while(rsUser.next()) {
+					dbEmailId = rsUser.getString(1);
+					dbfirstName = rsUser.getString(2);
+					dblastName = rsUser.getString(3);
+					dbPassword = rsUser.getString(4);
+					
+				}
+
+				RegistrationModel userDetailsModel = new RegistrationModel();
+				userDetailsModel.setFirst_name(dbfirstName);
+				out.println(dblastName);
+				userDetailsModel.setLast_name(dblastName);
+				userDetailsModel.setEmail_id(dbEmailId);
+				userDetailsModel.setPassword(dbPassword);
+				
+				return userDetailsModel;
+				
 			}
-			if((dbEmail_id.equals(email_id)) && (dbPassword.equals(password))) {
-				return true;
-			}else {
-				return result;
-			}
+			
+			return null;
 				
 		}catch (Exception e) {
 			e.printStackTrace();
-		}
-		return result;		
-	}	
+			return null;
+		}		
+	}
+	
 }

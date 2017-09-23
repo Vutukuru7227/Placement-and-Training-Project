@@ -59,8 +59,7 @@ public class Registration extends HttpServlet {
 			boolean result = registrationService.registerUser(registerationModel);
 			
 			if(result) {
-				PrintWriter out = response.getWriter();
-				out.println("You have been successfully registered");
+				response.sendRedirect("success.jsp");
 			}
 			
 		} catch (Exception e) {

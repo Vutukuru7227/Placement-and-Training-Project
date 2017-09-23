@@ -66,7 +66,7 @@
 
 
 	<%
-		String username = (String) request.getAttribute("email_id");
+		String username = (String) request.getAttribute("username");
 	%>
 
 <div class="jumbotron">
@@ -80,4 +80,3 @@
 </div>
 </body>
 </html>
->>>>>>> a7d28cd327cc9dbbb926b70708a79364408039cd
