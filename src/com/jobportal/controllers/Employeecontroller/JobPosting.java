@@ -64,6 +64,7 @@ public class JobPosting extends HttpServlet {
 			boolean result = jobPostingService.postJob(jobPostModel);
 			PrintWriter out = response.getWriter();
 			if(result) {
+				//TODO: Need a success page for this action
 				out.print("Job Successfully posted");
 			}
 			else {

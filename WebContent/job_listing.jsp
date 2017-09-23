@@ -1,4 +1,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="java.sql.DriverManager"%>
+<%@page import="java.sql.Connection" %>
+<%@page import="java.sql.ResultSet" %>
+<%@page import="java.sql.PreparedStatement" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -101,45 +105,38 @@
 <div id="job_listing">
     <ul>
         <li>
-            <a href=""><h3 style="color: blue">Job Title here</h3><h4>Job ID here</h4></a>
+        <%
+        
+		try {
+			String driver = "com.mysql.jdbc.Driver";
+			String url = "jdbc:mysql://localhost:3306/placement";
+			String username = "root";
+			String password = "";
+		
+			Class.forName(driver);
+			
+			Connection connection = DriverManager.getConnection(url, username, password);
+			
+			String sql = "(SELECT * FROM job_postings)";
+			PreparedStatement ps = connection.prepareStatement(sql);
+			
+			ResultSet resultSet = ps.executeQuery(sql);
+			
+			while(resultSet.next()){
+		%>
+            <a href=""><h3 style="color: blue"><%=resultSet.getString("job_title") %></h3><h4>Job ID here</h4></a>
             <h4>Company name here</h4>
-            <p>Job description here</p>
+            <p><%=resultSet.getString("job_description") %></p>
         </li><hr id="hrline">
-        <li>
-            <a href=""><h3 style="color: blue">Job Title here</h3><h4>Job ID here</h4></a>
-            <h4>Company name here</h4>
-            <p>Job description here</p>
-        </li><hr id="hrline">
-        <li>
-            <a href=""><h3 style="color: blue">Job Title here</h3><h4>Job ID here</h4></a>
-            <h4>Company name here</h4>
-            <p>Job description here</p>
-        </li><hr id="hrline">
-        <li>
-            <a href=""><h3 style="color: blue">Job Title here</h3><h4>Job ID here</h4></a>
-            <h4>Company name here</h4>
-            <p>Job description here</p>
-        </li><hr id="hrline">
-        <li>
-            <a href=""><h3 style="color: blue">Job Title here</h3><h4>Job ID here</h4></a>
-            <h4>Company name here</h4>
-            <p>Job description here</p>
-        </li><hr id="hrline">
-        <li>
-            <a href=""><h3 style="color: blue">Job Title here</h3><h4>Job ID here</h4></a>
-            <h4>Company name here</h4>
-            <p>Job description here</p>
-        </li><hr id="hrline">
-        <li>
-            <a href=""><h3 style="color: blue">Job Title here</h3><h4>Job ID here</h4></a>
-            <h4>Company name here</h4>
-            <p>Job description here</p>
-        </li><hr id="hrline">
+        <%
+			}
+		}
+        catch(Exception e){
+        		e.printStackTrace();
+        }
+        %>
     </ul>
-    
-
 </div>
-
 
 
 <footer>

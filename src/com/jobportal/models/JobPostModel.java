@@ -21,8 +21,7 @@ public class JobPostModel {
 	}
 	private String job_description;
 	private Date deadline;
-	
-	
+		
 	
 	/**
 	 * @return the job_id
