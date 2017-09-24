@@ -70,7 +70,10 @@ public class Registration extends HttpServlet {
 			
 			if(result) {
 				response.sendRedirect("success.jsp");
+			}else {
+				response.sendRedirect("error.jsp");
 			}
+			
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

@@ -59,6 +59,8 @@ public class Login extends HttpServlet {
 					dispatcher.include(request, response);
 				}
 
+			}else {
+				response.sendRedirect("error.jsp");
 			}	
 		}
 		catch (Exception e) {

@@ -81,17 +81,10 @@
         <button type="submit" class="btn btn-default" style="border-radius: 2px">Submit</button>
       </form>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="profile.jsp">Home</a></li>
-        <li><a href="#">Training</a></li>
-        <li><a href="#">Jobs</a></li>
-
-        <li class="dropdown">
-          <a href="user_profile.jsp" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Account<span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="user_profile.jsp">Profile</a></li>
-            <li><a href="logout.jsp">Logout</a></li>
-          </ul>
-        </li> 
+        <li><a href="employer_home_page.jsp">Home</a></li>
+        <li><a href="#">Jobs Posted</a></li>
+		<li><a href="#">Account</a></li>
+		<li><a href="logout.jsp">Logout</a></li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
@@ -125,13 +118,12 @@
           <br>
           
           <label>Deadline for application</label><br>
-          <input type="text" name="application_deadline" id="application_deadline" placeholder="YYYY-MM-DD" ><br>
+          <input type="text" name="application_deadline" id="application_deadline"><br>
           <br>
           <button name="submit" type="submit" class="btn btn-primary">Submit</button>
         </form>
 
 </div>
-
 
 
 <footer>

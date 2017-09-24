@@ -1,18 +1,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%
-
-if(session.getAttribute("email_id") == null){
-	response.sendRedirect("login.jsp");
-}
-	if(session.getAttribute("member_type") == "Applicant"){
-		response.sendRedirect("unauthorized_access.jsp");
-	}
-
-%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Unauthorized Access</title>
+    <title>Success</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE = edge">
     <meta name="viewport" content="width = device-width, initial-scale = 1">
@@ -46,38 +36,16 @@ if(session.getAttribute("email_id") == null){
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="profile.jsp" style="color: white">SYNTHESIZE</a>
+      <a class="navbar-brand" href="#" style="color: white">SYNTHESIZE</a>
     </div>
 
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <form class="navbar-form navbar-left">
-        <div class="form-group">
-          <input type="text" class="form-control" placeholder="Search" style="border-radius: 2px">
-        </div>
-        <button type="submit" class="btn btn-default" style="border-radius: 2px">Submit</button>
-      </form>
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="employer_home_page.jsp">Home</a></li>
-        <li><a href="#">Jobs Posted</a></li>
-		<li><a href="#">Account</a></li>
-		<li><a href="logout.jsp">Logout</a></li>
-      </ul>
-    </div><!-- /.navbar-collapse -->
+   
   </div><!-- /.container-fluid -->
 </nav>
 
-
-	<%
-		String username = (String) session.getAttribute("username");
-		String email_id = (String) session.getAttribute("email_id");
-		request.setAttribute("email_id", email_id);
-	%>
-
 <div class="jumbotron">
-  <h2 class="text-center">Hello <%=username%>!</h2>
-  <p class="text-center">Welcome to Training and Placement Job Portal site</p>
-  <p class="text-center"><a class="btn btn-primary btn-lg" href="job_posting_screen.jsp" role="button">Post a New Job!</a></p>
+  <h1 class="text-center" style="color:red;">Error !</h1>
+  <p class="text-center"><a class="btn btn-primary btn-lg" href="index.jsp" role="button">Login/Create your account !</a></p>
 </div>
 
 

@@ -46,7 +46,7 @@ if(session.getAttribute("email_id") == null){
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="profile.jsp" style="color: white">SYNTHESIZE</a>
+      <a class="navbar-brand" href="#" style="color: white">SYNTHESIZE</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -68,15 +68,8 @@ if(session.getAttribute("email_id") == null){
 </nav>
 
 
-	<%
-		String username = (String) session.getAttribute("username");
-		String email_id = (String) session.getAttribute("email_id");
-		request.setAttribute("email_id", email_id);
-	%>
-
 <div class="jumbotron">
-  <h2 class="text-center">Hello <%=username%>!</h2>
-  <p class="text-center">Welcome to Training and Placement Job Portal site</p>
+  <p class="text-center">Job Posting Successful !</p>
   <p class="text-center"><a class="btn btn-primary btn-lg" href="job_posting_screen.jsp" role="button">Post a New Job!</a></p>
 </div>
 

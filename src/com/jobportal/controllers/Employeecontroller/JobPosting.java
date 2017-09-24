@@ -70,7 +70,7 @@ public class JobPosting extends HttpServlet {
 			PrintWriter out = response.getWriter();
 			if(result) {
 				//TODO: Need a success page for this action
-				out.print("Job Successfully posted");
+				response.sendRedirect("job_post_success.jsp");
 			}
 			else {
 				out.println("Please retry later");
