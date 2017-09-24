@@ -46,7 +46,10 @@ public class JobPosting extends HttpServlet {
 
 		String job_title = request.getParameter("job_title");
 		String job_description = request.getParameter("job_description");
+		String company = request.getParameter("company");
+		String location = request.getParameter("location");
 		String application_deadline = request.getParameter("application_deadline");
+		String emp_id = request.getParameter("emp_id");
 		out.println(job_title);
 		out.println(job_description);
 		out.println(application_deadline);
@@ -59,7 +62,9 @@ public class JobPosting extends HttpServlet {
 			jobPostModel.setJob_title(job_title);
 			jobPostModel.setJob_description(job_description);
 			jobPostModel.setDeadline(deadline);
-			
+			jobPostModel.setCompany(company);
+			jobPostModel.setLocation(location);
+			jobPostModel.setEmp_id(emp_id);
 			JobPostingService jobPostingService = new JobPostingService();
 			boolean result = jobPostingService.postJob(jobPostModel);
 			PrintWriter out = response.getWriter();

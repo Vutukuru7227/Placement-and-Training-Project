@@ -135,9 +135,13 @@
 			
 			while(resultSet.next()){
 		%>
-            <a href=""><h3 style="color: blue"><%=resultSet.getString("job_title") %></h3><h4>Job ID here</h4></a>
-            <h4>Company name here</h4>
-            <p><%=resultSet.getString("job_description") %></p>
+            <a href=""><h3 style="color: blue"><%=resultSet.getString("job_title") %></h3></a>
+            <h4>Company:<%=resultSet.getString("company_name") %></h4>
+            <h4>Location: <%=resultSet.getString("location") %></h4>
+            <p>Job Description:<%=resultSet.getString("job_description") %></p>
+            <h5>Application Deadline<%=resultSet.getString("deadline") %></h5>
+            <h5>Employer Contact:<%=resultSet.getString("emp_id") %></h5> 
+            <h6>Job Id:<%=resultSet.getString("job_id") %></h6>
         </li><hr id="hrline">
         <%
 			}

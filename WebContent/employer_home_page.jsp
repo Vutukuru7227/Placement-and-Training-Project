@@ -77,6 +77,8 @@ if(session.getAttribute("email_id") == null){
 
 	<%
 		String username = (String) session.getAttribute("username");
+		String email_id = (String) session.getAttribute("email_id");
+		request.setAttribute("email_id", email_id);
 	%>
 
 <div class="jumbotron">

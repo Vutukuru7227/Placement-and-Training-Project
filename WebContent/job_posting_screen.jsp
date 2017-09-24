@@ -102,12 +102,28 @@
 <div id="job_posting">
 
         <form id="posting" method="POST" action="JobPosting">
+        	<%
+        		request.setAttribute("emp_id", session.getAttribute("email_id"));
+        	%>
+          <label>Employee Id</label><br>
+          <input type="text" name="emp_id" value=<%=session.getAttribute("email_id") %> id="emp_id" size="60px" readonly="readonly"><br>
+          <br>
+          
           <label>Job Title</label><br>
           <input type="text" name="job_title" id="job_title" size="60px" ><br>
           <br>
           <label>Job Description</label><br>
             <textarea name="job_description" id="job_description" rows="4" cols="62"></textarea><br>
           <br>
+          
+          <label>Company</label><br>
+          <input type="text" name="company" id="company" size="60px" ><br>
+          <br>
+          
+          <label>Location</label><br>
+          <input type="text" name="location" id="location" size="60px" ><br>
+          <br>
+          
           <label>Deadline for application</label><br>
           <input type="text" name="application_deadline" id="application_deadline" placeholder="YYYY-MM-DD" ><br>
           <br>
