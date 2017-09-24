@@ -96,15 +96,15 @@
             </div>
             <div class="form-group">
               <label class="control-label" for="firstname">First name</label>
-              <input id="firstname" name="firstname" type="text" maxlength="50" class="form-control" required>
+              <input id="firstname" name="firstname" type="text" pattern="[A-Za-z]{1,32}" title="Ex:- Peter" maxlength="50" class="form-control" required>
             </div>
             <div class="form-group">
               <label class="control-label" for="lastname">Last name</label>
-              <input id="lastname" name="lastname" type="text" maxlength="50" class="form-control" required>
+              <input id="lastname" name="lastname" type="text" pattern="[A-Za-z]{1,32}" title="Ex:- Parker" maxlength="50" class="form-control" required>
             </div>
             <div class="form-group">
               <label class="control-label" for="signupEmail">Email</label>
-              <input id="signupEmail" name="signupEmail" type="email" maxlength="50" class="form-control" required>
+              <input id="signupEmail" name="signupEmail" type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" maxlength="50" title="Ex:- xyz@example.com" class="form-control" required>
             </div>
             <div class="form-group">
               <label class="control-label" for="signupPassword">Password</label>
