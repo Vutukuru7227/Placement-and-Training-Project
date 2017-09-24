@@ -1,4 +1,14 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%
+
+	if(session.getAttribute("email_id") == null){
+		response.sendRedirect("login.jsp");
+	}
+	if(session.getAttribute("member_type") == "Employer"){
+		response.sendRedirect("unauthorized_access.jsp");
+	}
+
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>

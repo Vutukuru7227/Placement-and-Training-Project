@@ -3,6 +3,17 @@
 <%@page import="java.sql.Connection" %>
 <%@page import="java.sql.ResultSet" %>
 <%@page import="java.sql.PreparedStatement" %>
+
+<%
+
+	if(session.getAttribute("email_id") == null){
+		response.sendRedirect("login_required.jsp");
+	}
+	if(session.getAttribute("member_type") == "Employer"){
+		response.sendRedirect("unauthorized_access.jsp");
+	}
+
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>

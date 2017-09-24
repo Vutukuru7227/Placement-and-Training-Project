@@ -1,8 +1,18 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%
+
+if(session.getAttribute("email_id") == null){
+	response.sendRedirect("login.jsp");
+}
+	if(session.getAttribute("member_type") == "Applicant"){
+		response.sendRedirect("unauthorized_access.jsp");
+	}
+
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Training and Placement Job Portal</title>
+    <title>Unauthorized Access</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE = edge">
     <meta name="viewport" content="width = device-width, initial-scale = 1">

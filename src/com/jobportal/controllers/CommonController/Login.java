@@ -49,10 +49,12 @@ public class Login extends HttpServlet {
 				session.setAttribute("username", result.getFirst_name()+" "+result.getLast_name());
 
 				if(result.getMember_type().equals("Applicant")) {
+					session.setAttribute("member_type", "Applicant");
 					RequestDispatcher dispatcher = request.getRequestDispatcher("user_home_page.jsp");
 					dispatcher.include(request, response);
 				}
 				else {
+					session.setAttribute("member_type", "Employer");
 					RequestDispatcher dispatcher = request.getRequestDispatcher("employer_home_page.jsp");
 					dispatcher.include(request, response);
 				}

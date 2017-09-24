@@ -1,14 +1,4 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%
-
-	if(session.getAttribute("email_id") == null){
-		response.sendRedirect("login.jsp");
-	}
-	if(session.getAttribute("member_type") == "Employer"){
-		response.sendRedirect("unauthorized_access.jsp");
-	}
-
-%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -49,42 +39,26 @@
       <a class="navbar-brand" href="profile.jsp" style="color: white">SYNTHESIZE</a>
     </div>
 
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <form class="navbar-form navbar-left">
-        <div class="form-group">
-          <input type="text" class="form-control" placeholder="Search" style="border-radius: 2px">
-        </div>
-        <button type="submit" class="btn btn-default" style="border-radius: 2px">Submit</button>
-      </form>
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="profile.jsp">Home</a></li>
-        <li><a href="#">Training</a></li>
-        <li><a href="#">Jobs</a></li>
-
-        <li class="dropdown">
-          <a href="user_profile.jsp" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Account<span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="user_profile.jsp">Profile</a></li>
-            <li><a href="logout.jsp">Logout</a></li>
-          </ul>
-        </li> 
-      </ul>
-    </div><!-- /.navbar-collapse -->
+   
   </div><!-- /.container-fluid -->
 </nav>
 
-
-	<%
-		String username = (String) session.getAttribute("username");
-	%>
-
 <div class="jumbotron">
-  <h2 class="text-center">Hello <%=username%>!</h2>
-  <p class="text-center">Welcome to Training and Placement Job Portal site</p>
-  <p class="text-center"><a class="btn btn-primary btn-lg" href="user_profile.html" role="button">Learn more by creating your profile page!</a></p><br><br>
-  <p class="text-center"><a class="btn btn-primary btn-lg" href="job_listing.jsp" role="button">View your Future job here first!</a></p>
-  
+  <p class="text-center">Unauthorized Access</p>
+  <%
+  	String member_type = session.getAttribute("member_type").toString();
+  	if(member_type == "Applicant"){
+  		%>
+  		 <p class="text-center"><a class="btn btn-primary btn-lg" href="user_home_page.jsp" role="button">Click here to continue.</a></p>
+  	<%
+  	}
+  	if(member_type == "Employer"){
+  		%>
+  		  <p class="text-center"><a class="btn btn-primary btn-lg" href="employer_home_page.jsp" role="button">Click here to continue.</a></p>
+  	<%
+  	}
+  %>
+
 </div>
 
 
