@@ -68,12 +68,12 @@
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <form class="navbar-form navbar-left">
+      <!--  <form class="navbar-form navbar-left">
         <div class="form-group">
           <input type="text" class="form-control" placeholder="Search" style="border-radius: 2px">
         </div>
         <button type="submit" class="btn btn-default" style="border-radius: 2px">Submit</button>
-      </form>
+      </form>-->
       <ul class="nav navbar-nav navbar-right">
         <li><a href="user_home_page.jsp">Home</a></li>
         <li><a href="#">Training</a></li>
@@ -86,7 +86,7 @@
 </nav>
 
 
-<!-- General Informnation -->
+<!-- General Information -->
 <div class="container">
   <table class="table table-bordered table-condensed" align="center" style="background-color: white; max-width: 800px">
     <tr>

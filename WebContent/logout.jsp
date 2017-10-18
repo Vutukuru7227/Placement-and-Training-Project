@@ -48,7 +48,7 @@
 	%>
 
 <div class="jumbotron">
-  <p class="text-center">You have succesfully Logged out</p>
+  <p class="text-center">You have successfully Logged out</p>
   <p class="text-center"><a class="btn btn-primary btn-lg" href="login.jsp" role="button">Login to your account !</a></p>
 </div>
 

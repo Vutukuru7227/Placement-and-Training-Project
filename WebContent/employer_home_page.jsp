@@ -51,12 +51,12 @@ if(session.getAttribute("email_id") == null){
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <form class="navbar-form navbar-left">
+     <!--   <form class="navbar-form navbar-left">
         <div class="form-group">
           <input type="text" class="form-control" placeholder="Search" style="border-radius: 2px">
         </div>
         <button type="submit" class="btn btn-default" style="border-radius: 2px">Submit</button>
-      </form>
+      </form>-->
       <ul class="nav navbar-nav navbar-right">
         <li><a href="employer_home_page.jsp">Home</a></li>
         <li><a href="#">Jobs Posted</a></li>

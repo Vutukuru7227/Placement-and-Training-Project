@@ -90,9 +90,9 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <form class="navbar-form navbar-left">
         <div class="form-group">
-          <input type="text" class="form-control" placeholder="Search" style="border-radius: 2px">
+          <input type="text" class="form-control" placeholder="Search" style="border-radius: 2px" size="40px">
         </div>
-        <button type="submit" class="btn btn-default" style="border-radius: 2px">Submit</button>
+        <button type="submit" class="btn btn-default" style="border-radius: 2px"><span class="glyphicon glyphicon-search"></span></button>
       </form>
       <ul class="nav navbar-nav navbar-right">
         <li><a href="user_home_page.jsp">Home</a></li>
@@ -116,7 +116,7 @@
 			String driver = "com.mysql.jdbc.Driver";
 			String url = "jdbc:mysql://localhost:3306/placement";
 			String username = "root";
-			String password = "";
+			String password = "root";
 		
 			Class.forName(driver);
 			
@@ -132,9 +132,9 @@
             <a href=""><h3 style="color: blue"><%=resultSet.getString("job_title") %></h3></a>
             <h4>Company:<%=resultSet.getString("company_name") %></h4>
             <h4>Location: <%=resultSet.getString("location") %></h4>
-            <p>Job Description:<%=resultSet.getString("job_description") %></p>
+            <!--<p>Job Description:<%=resultSet.getString("job_description") %></p>
             <h5>Application Deadline<%=resultSet.getString("deadline") %></h5>
-            <h5>Employer Contact:<%=resultSet.getString("emp_id") %></h5> 
+            <h5>Employer Contact:<%=resultSet.getString("emp_id") %></h5> -->
             <h6>Job Id:<%=resultSet.getString("job_id") %></h6>
         </li><hr id="hrline">
         <%

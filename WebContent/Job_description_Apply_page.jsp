@@ -1,14 +1,3 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%
-
-	if(session.getAttribute("email_id") == null){
-		response.sendRedirect("login_required.jsp");
-	}
-	if(session.getAttribute("member_type") == "Applicant"){
-		response.sendRedirect("unauthorized_access.jsp");
-	}
-
-%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -35,10 +24,19 @@
         .bottom_ul li:after { content:"/"; color:#FFF; margin-right:8px; margin-left:8px;}
         .bottom_ul li a { color:#FFF;  font-size:12px;}
         
-        #job_posting{
+        #job_listing{
             text-align: left;
-            padding-left: 10%;
+            padding-left: 3%;
             margin-bottom: 2%;
+        }
+        
+        #hrline{ 
+            margin-top: 0.5em;
+            margin-bottom: 0.5em;
+            margin-left: auto;
+            margin-right: auto;
+            border-width: 2px;
+            color: grey;
         }
     </style>
 
@@ -74,16 +72,17 @@
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <!--  <form class="navbar-form navbar-left">
+      <form class="navbar-form navbar-left">
         <div class="form-group">
-          <input type="text" class="form-control" placeholder="Search" style="border-radius: 2px">
+          <input type="text" class="form-control" placeholder="Search" style="border-radius: 2px" size="40px">
         </div>
-        <button type="submit" class="btn btn-default" style="border-radius: 2px">Submit</button>
-      </form>-->
+        <button type="submit" class="btn btn-default" style="border-radius: 2px"><span class="glyphicon glyphicon-search"></span></button>
+      </form>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="employer_home_page.jsp">Home</a></li>
-        <li><a href="#">Jobs Posted</a></li>
-		<li><a href="#">Account</a></li>
+        <li><a href="user_home_page.jsp">Home</a></li>
+        <li><a href="#">Training</a></li>
+        <li><a href="job_listing.jsp">Jobs</a></li>
+		<li><a href="user_profile.jsp">Account</a></li>
 		<li><a href="logout.jsp">Logout</a></li>
       </ul>
     </div><!-- /.navbar-collapse -->
@@ -92,37 +91,19 @@
 
     
 <!-- Job posting form-->
-<div id="job_posting">
-
-        <form id="posting" method="POST" action="JobPosting">
-        	<%
-        		request.setAttribute("emp_id", session.getAttribute("email_id"));
-        	%>
-          <label>Employee Id</label><br>
-          <input type="text" name="emp_id" value=<%=session.getAttribute("email_id") %> id="emp_id" size="60px" readonly="readonly"><br>
-          <br>
-          
-          <label>Job Title</label><br>
-          <input type="text" name="job_title" id="job_title" size="60px" ><br>
-          <br>
-          <label>Job Description</label><br>
-            <textarea name="job_description" id="job_description" rows="4" cols="62"></textarea><br>
-          <br>
-          
-          <label>Company</label><br>
-          <input type="text" name="company" id="company" size="60px" ><br>
-          <br>
-          
-          <label>Location</label><br>
-          <input type="text" name="location" id="location" size="60px" ><br>
-          <br>
-          
-          <label>Deadline for application</label><br>
-          <input type="text" name="application_deadline" id="application_deadline"><br>
-          <br>
-          <button name="submit" type="submit" class="btn btn-primary">Submit</button>
-        </form>
-
+<div id="job_listing">
+    <ul>
+        <li>
+            <a href=""><h3 style="color: blue">Job Title</h3></a>
+            <h4>Company:</h4>
+            <h4>Location:</h4>
+            <p>Job Description:</p>
+            <h5>Application Deadline:</h5>
+            <h5>Employer Contact:</h5>
+            <h6>Job Id:</h6>
+            <button type="button" class="btn btn-success">Apply</button>
+        </li><hr id="hrline">
+    </ul>
 </div>
 
 
