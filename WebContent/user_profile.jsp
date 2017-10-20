@@ -1,4 +1,7 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <%
 
 	if(session.getAttribute("email_id") == null){
@@ -85,6 +88,12 @@
   </div><!-- /.container-fluid -->
 </nav>
 
+	  <%
+		String username = (String) session.getAttribute("username");
+	  	String email = (String) session.getAttribute("email_id");
+	  %>
+	  <h2 class="text-center">Hello <%=username%>!</h2>
+	  <h4 class="text-center"><%=email%></h4>
 
 <!-- General Information -->
 <div class="container">
@@ -114,35 +123,26 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
+      
+      
       <div class="modal-body">
-        <form id="" method="POST" action="">
-          <label>First Name</label><br>
-          <input type="text" name="" id=""><br>
-
-          <label>Last Name</label><br>
-          <input type="text" name="" id=""><br>
-
-          <label>Email</label><br>
-          <input type="text" name="" id=""><br>
-
+      	
+        <form method="POST" action="UserGeneralInfo">
           <label>Primary Phone</label><br>
-          <input type="text" name="" id=""><br>
+          <input type="text" name="phone_no" id="phone_no" value="<c:out value='${info.phone_no}' />"><br>
 
           <label>Address</label><br>
-          <input type="text" name="" id="" placeholder="Street/Apt No."><br>
+          <input type="text" name="address" id="address" placeholder="Street/Apt No."value="<c:out value='${info.address}' />" ><br>
 
           <label>Zipcode</label><br>
-          <input type="text" name="" id=""><br>
-
-          
-
+          <input type="text" name="zip_code" id="zip_code" value="<c:out value='${info.zip_code}' />"><br>
+		  
+		  <div class="modal-footer">
+        	<button type="submit" class="btn btn-success">Save</button>
+      	  </div>	
         </form>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-success">Save</button>
-        <button type="button" class="btn btn-danger" style="float: left;">Delete</button>
-      </div>
+      
     </div>
   </div>
 </div>
@@ -153,7 +153,7 @@
   <table class="table table-bordered table-condensed" align="center" style="background-color: white; max-width: 800px">
     <tr>
       <th>Education<span style="float: right;">
-        <button type="button" class="btn btn-default glyphicon glyphicon-plus-sign" data-toggle="modal" data-target="#addEduModal">
+        <button type="button" class="btn btn-default glyphicon glyphicon-plus-sign" data-toggle="modal" data-target="#addEduModal" href="UserEducationInfo?action=insert">
         </button>
       </span></th>
     </tr>
@@ -161,7 +161,7 @@
       <td>
         <!-- Education Information Goes here -->
         <span style="float: right;">
-        <button type="button" class="btn btn-default glyphicon glyphicon-pencil" data-toggle="modal" data-target="#editEduModal">
+        <button type="button" class="btn btn-default glyphicon glyphicon-pencil" data-toggle="modal" data-target="#editEduModal" href="UserEducationInfo?action=edit&userId=<c:out value="${user.userid}"/>">
         </button>
       </span>
       </td>

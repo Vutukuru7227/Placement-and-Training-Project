@@ -11,5 +11,6 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="C:/Users/manohar/Downloads/Programs/apache-tomcat-9.0.0.M26/lib/servlet-api.jar"/>
+	<classpathentry kind="lib" path="C:/Users/manohar/workspace/jstl-1.2.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
