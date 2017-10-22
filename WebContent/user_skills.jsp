@@ -95,28 +95,24 @@
 	  <h2 class="text-center">Hello <%=username%>!</h2>
 	  <h4 class="text-center"><%=email%></h4>
 
-	  <h2>Add/Edit Work Experience Details</h2>
+	  <h2>Add/Edit Your Skills</h2>
 	  
 	  <div class="container">
-	  <form id="" method="POST" action="WorkExperience">
+	  <form id="" method="POST" action="Skills">
 	  	  <input type="text" readonly="readonly" name="user_id" placeholder="not editable"
-            value="<c:out value="${workmodel.user_id}" />" style="display:none;"/> <br /> 
+            value="<c:out value="${skillmodel.user_id}" />" style="display:none;"/> <br /> 
              	
-          <label>Title of the position</label><br>
-          <input type="text" name="title" id="" value="<c:out value="${workmodel.title}" />"><br>
-
-          <label>Organization Name</label><br>
-          <input type="text" name="organization_name" id="" value="<c:out value="${workmodel.organization_name}" />"><br>
-
-          <label>Location</label><br>
-          <input type="text" name="location" id="" value="<c:out value="${workmodel.location}" />"><br>
-
-          <label>Time Period</label><br>
-          From: <input type="number" name="exp_from" id="" min="2000" max="2017" value="<c:out value="${workmodel.exp_from}" />"> 
-          To: <input type="number" name="exp_to" id="" min="2000" max="2024" value="<c:out value="${workmodel.exp_to}" />"><br>
-
-          <label>Achievements</label><br>
-          <textarea rows="4" cols="50" name="achievements" value="<c:out value="${workmodel.achievements}" />"></textarea>
+          <label>Skill Category</label><br>
+          <select name="category">
+          	<option value="<c:out value="${skillmodel.category}" />"><c:out value="${skillmodel.category}" /></option>
+  			<option value="Programming">Programming</option>
+  			<option value="Databases">Databases</option>
+  			<option value="Operating Systems">Operating Systems</option>
+  			<option value="Network Protocols">Network Protocols</option>
+ 			<option value="Others">Others</option>
+		</select><br>
+          <label>Skill</label><br>
+          <input type="text" name="skill" id="" placeholder="Ex:- Java" value="<c:out value="${skillmodel.skill}" />">
           <br>
           
           <button type="submit" class="btn btn-success">Save</button>

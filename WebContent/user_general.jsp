@@ -95,28 +95,21 @@
 	  <h2 class="text-center">Hello <%=username%>!</h2>
 	  <h4 class="text-center"><%=email%></h4>
 
-	  <h2>Add/Edit Work Experience Details</h2>
+	  <h2>Add/Edit General Info</h2>
 	  
 	  <div class="container">
-	  <form id="" method="POST" action="WorkExperience">
+	  <form id="" method="POST" action="GeneralInfo">
 	  	  <input type="text" readonly="readonly" name="user_id" placeholder="not editable"
-            value="<c:out value="${workmodel.user_id}" />" style="display:none;"/> <br /> 
+            value="<c:out value="${generalmodel.user_id}" />" style="display:none;" /> <br /> 
              	
-          <label>Title of the position</label><br>
-          <input type="text" name="title" id="" value="<c:out value="${workmodel.title}" />"><br>
+          <label>Primary Phone</label><br>
+          <input type="text" name="phone_no" id="phone_no" value="<c:out value='${generalmodel.phone_no}' />"><br>
 
-          <label>Organization Name</label><br>
-          <input type="text" name="organization_name" id="" value="<c:out value="${workmodel.organization_name}" />"><br>
+          <label>Address</label><br>
+          <input type="text" name="address" id="address" placeholder="Street/Apt No."value="<c:out value='${generalmodel.address}' />" ><br>
 
-          <label>Location</label><br>
-          <input type="text" name="location" id="" value="<c:out value="${workmodel.location}" />"><br>
-
-          <label>Time Period</label><br>
-          From: <input type="number" name="exp_from" id="" min="2000" max="2017" value="<c:out value="${workmodel.exp_from}" />"> 
-          To: <input type="number" name="exp_to" id="" min="2000" max="2024" value="<c:out value="${workmodel.exp_to}" />"><br>
-
-          <label>Achievements</label><br>
-          <textarea rows="4" cols="50" name="achievements" value="<c:out value="${workmodel.achievements}" />"></textarea>
+          <label>Zipcode</label><br>
+          <input type="text" name="zip_code" id="zip_code" value="<c:out value='${generalmodel.zip_code}' />"><br>
           <br>
           
           <button type="submit" class="btn btn-success">Save</button>

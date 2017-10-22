@@ -10,7 +10,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.jobportal.models.EducationModel;
 import com.jobportal.models.WorkExperienceModel;
 
 public class WorkExperienceService {
@@ -54,13 +53,13 @@ public class WorkExperienceService {
         }
     }
 
-	public List<WorkExperienceModel> getWorkexDetails() throws Exception {
+	public List<WorkExperienceModel> getWorkexDetails(String email_id) throws Exception {
 		List<WorkExperienceModel> workex = new ArrayList<>();
 		try {
 			// We should write where email_id condition using session in the below sql command
 			PreparedStatement preparedStatement = getConnection().
-                    prepareStatement("select * from user_work_experience");
-           // preparedStatement.setString(1, "email_id");
+                    prepareStatement("select * from user_work_experience where email_id=?");
+            preparedStatement.setString(1, email_id);
             ResultSet rs = preparedStatement.executeQuery();
            
             while (rs.next()) {
@@ -72,7 +71,8 @@ public class WorkExperienceService {
                 workmodel.setLocation(rs.getString("location"));
                 workmodel.setExp_from(rs.getString("exp_from"));
                 workmodel.setExp_to(rs.getString("exp_to"));
-                workmodel.setAchievements(rs.getString("achivements"));
+                workmodel.setAchievements(rs.getString("achievements"));
+                
                 workex.add(workmodel);
             }
         } catch (SQLException e) {
@@ -112,7 +112,7 @@ public class WorkExperienceService {
                 workmodel.setLocation(rs.getString("location"));
                 workmodel.setExp_from(rs.getString("exp_from"));
                 workmodel.setExp_to(rs.getString("exp_to"));
-                workmodel.setAchievements(rs.getString("achivements"));
+                workmodel.setAchievements(rs.getString("achievements"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -124,8 +124,7 @@ public class WorkExperienceService {
 	public void updateWorkex(WorkExperienceModel workmodel) throws Exception {
 		try {
             PreparedStatement ps = getConnection()
-                    .prepareStatement("update user_work_experience set title=?, organization_name=?, location=?, exp_from=?,  exp_to=?, achievements=?" +
-                            "where user_id=?");
+                    .prepareStatement("update user_work_experience set title=?, organization_name=?, location=?, exp_from=?,  exp_to=?, achievements=? where user_id=?");
             // Parameters start with 1
             ps.setString(1, workmodel.getTitle());
             ps.setString(2, workmodel.getOrganization_name());

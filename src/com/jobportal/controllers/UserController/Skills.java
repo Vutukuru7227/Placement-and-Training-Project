@@ -10,26 +10,23 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.jobportal.models.WorkExperienceModel;
-import com.jobportal.services.user.WorkExperienceService;
+import com.jobportal.models.SkillsModel;
+import com.jobportal.services.user.SkillsService;
 
 /**
- * Servlet implementation class WorkExperience
+ * Servlet implementation class Skills
  */
-@WebServlet("/WorkExperience")
-public class WorkExperience extends HttpServlet {
+@WebServlet("/Skills")
+public class Skills extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
-    private WorkExperienceService workservice;
-
-       
+    private SkillsService skills;
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public WorkExperience() {
+    public Skills() {
         super();
         // TODO Auto-generated constructor stub
-        workservice = new WorkExperienceService();
+        skills = new SkillsService();
     }
 
 	/**
@@ -40,43 +37,43 @@ public class WorkExperience extends HttpServlet {
 		//System.out.println(request.getParameter("user_id"));
         String action = request.getParameter("action");
         HttpSession session = request.getSession();
-		String email_id = (String) session.getAttribute("email_id");
+        String email_id = (String) session.getAttribute("email_id");
         if (action.equalsIgnoreCase("delete")){
             int userId = Integer.parseInt(request.getParameter("userId"));
             try {
-            	workservice.deleteWorkex(userId);
+            	skills.deleteSkill(userId);
 			} catch (Exception e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
             forward = "/user_profile.jsp";
             try {
-				request.setAttribute("workex", workservice.getWorkexDetails(email_id));
+				request.setAttribute("skills", skills.getSkillDetails(email_id));
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}    
         } else if (action.equalsIgnoreCase("edit")){
-            forward = "/user_workex.jsp";
+            forward = "/user_skills.jsp";
             int userId = Integer.parseInt(request.getParameter("userId"));
-            WorkExperienceModel workmodel = null;
+            SkillsModel skillmodel = null;
 			try {
-				workmodel = workservice.editWorkex(userId);
+				skillmodel = skills.editSkill(userId);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-            request.setAttribute("workmodel", workmodel);
-        }else if (action.equalsIgnoreCase("listWorkExperience")){
+            request.setAttribute("skillmodel", skillmodel);
+        }else if (action.equalsIgnoreCase("listSkills")){
             forward = "/user_profile.jsp";
             try {
-				request.setAttribute("workex", workservice.getWorkexDetails(email_id));
+				request.setAttribute("skills", skills.getSkillDetails(email_id));
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
         }  else {
-            forward = "/user_workex.jsp";
+            forward = "/user_skills.jsp";
         }
 
         RequestDispatcher view = request.getRequestDispatcher(forward);
@@ -87,31 +84,28 @@ public class WorkExperience extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		WorkExperienceModel workmodel = new WorkExperienceModel();
+		SkillsModel skillmodel = new SkillsModel();
 		HttpSession session = request.getSession();
 		String email_id = (String) session.getAttribute("email_id");
-		workmodel.setEmail_id((String) session.getAttribute("email_id"));
-		workmodel.setTitle(request.getParameter("title"));
-		workmodel.setOrganization_name(request.getParameter("organization_name"));
-		workmodel.setLocation(request.getParameter("location"));
-		workmodel.setExp_from(request.getParameter("exp_from"));
-		workmodel.setExp_to(request.getParameter("exp_to"));
-		workmodel.setAchievements(request.getParameter("achievements"));
+		skillmodel.setEmail_id((String) session.getAttribute("email_id"));
+		skillmodel.setCategory(request.getParameter("category"));
+		skillmodel.setSkill(request.getParameter("skill"));
+		
 		
 		String userid = request.getParameter("user_id");
         if(userid == null || userid.isEmpty())
         {
             try {
-            	workservice.addWorkex(workmodel);
+				skills.addSkill(skillmodel);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
         }else
         {
-        	workmodel.setUser_id(Integer.parseInt(userid));
+        	skillmodel.setUser_id(Integer.parseInt(userid));
             try {
-            	workservice.updateWorkex(workmodel);
+            	skills.updateSkill(skillmodel);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -120,7 +114,7 @@ public class WorkExperience extends HttpServlet {
         
         RequestDispatcher view = request.getRequestDispatcher("/user_profile.jsp");
         try {
-			request.setAttribute("workex", workservice.getWorkexDetails(email_id));
+			request.setAttribute("skills", skills.getSkillDetails(email_id));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -129,5 +123,4 @@ public class WorkExperience extends HttpServlet {
        
 		
 	}
-
 }

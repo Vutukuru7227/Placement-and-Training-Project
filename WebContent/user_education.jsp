@@ -99,8 +99,8 @@
 	  
 	  <div class="container">
 	  <form id="" method="POST" action="Education">
-	  	  <label>ID</label> <input type="text" readonly="readonly" name="user_id" placeholder="not editable"
-            value="<c:out value="${edumodel.user_id}" />" /> <br /> 
+	  	  <input type="text" readonly="readonly" name="user_id" placeholder="not editable"
+            value="<c:out value="${edumodel.user_id}" />" style="display:none;" /> <br /> 
              	
           <label>University</label><br>
           <input type="text" name="institution" id="" value="<c:out value="${edumodel.institution}" />"><br>

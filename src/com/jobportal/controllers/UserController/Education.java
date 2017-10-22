@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.jobportal.models.EducationModel;
+import com.jobportal.models.WorkExperienceModel;
 import com.jobportal.services.user.EducationService;
 
 /**
@@ -19,8 +20,7 @@ import com.jobportal.services.user.EducationService;
 @WebServlet("/Education")
 public class Education extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static String INSERT_OR_EDIT = "/user_profile2.jsp";
-    private static String LIST_USER = "/user_profile_display.jsp";
+	
     private EducationService eduservice;
 
        
@@ -37,8 +37,51 @@ public class Education extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		String forward="";
+		//System.out.println(request.getParameter("user_id"));
+        String action = request.getParameter("action");
+        HttpSession session = request.getSession();
+        String email_id = (String) session.getAttribute("email_id");
+        if (action.equalsIgnoreCase("delete")){
+            int userId = Integer.parseInt(request.getParameter("userId"));
+            try {
+            	eduservice.deleteEducation(userId);
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+            forward = "/user_profile.jsp";
+            try {
+				request.setAttribute("education", eduservice.getEducationDetails(email_id));
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}    
+        } else if (action.equalsIgnoreCase("edit")){
+            forward = "/user_education.jsp";
+            int userId = Integer.parseInt(request.getParameter("userId"));
+            EducationModel edumodel = null;
+			try {
+				edumodel = eduservice.editEducation(userId);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+            request.setAttribute("edumodel", edumodel);
+        }else if (action.equalsIgnoreCase("listEducation")){
+            forward = "/user_profile.jsp";
+            try {
+				request.setAttribute("education", eduservice.getEducationDetails(email_id));
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+        }  else {
+            forward = "/user_education.jsp";
+        }
+
+        RequestDispatcher view = request.getRequestDispatcher(forward);
+        view.forward(request, response);
 	}
 
 	/**
@@ -47,6 +90,7 @@ public class Education extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		EducationModel edumodel = new EducationModel();
 		HttpSession session = request.getSession();
+		String email_id = (String) session.getAttribute("email_id");
 		edumodel.setEmail_id((String) session.getAttribute("email_id"));
 		edumodel.setInstitution(request.getParameter("institution"));
 		edumodel.setLevel(request.getParameter("level"));
@@ -64,7 +108,25 @@ public class Education extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+        }else
+        {
+        	edumodel.setUser_id(Integer.parseInt(userid));
+            try {
+            	eduservice.updateEducation(edumodel);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
         }
+        
+        RequestDispatcher view = request.getRequestDispatcher("/user_profile.jsp");
+        try {
+			request.setAttribute("education", eduservice.getEducationDetails(email_id));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        view.forward(request, response);
        
 		
 	}
