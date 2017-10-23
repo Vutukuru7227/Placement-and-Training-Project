@@ -37,10 +37,12 @@ public class WorkExperience extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String forward="";
+		//System.out.println(request.getParameter("user_id"));
         String action = request.getParameter("action");
-        
+        HttpSession session = request.getSession();
+		String email_id = (String) session.getAttribute("email_id");
         if (action.equalsIgnoreCase("delete")){
-            int userId = Integer.parseInt(request.getParameter("user_id"));
+            int userId = Integer.parseInt(request.getParameter("userId"));
             try {
             	workservice.deleteWorkex(userId);
 			} catch (Exception e1) {
@@ -49,14 +51,14 @@ public class WorkExperience extends HttpServlet {
 			}
             forward = "/user_profile.jsp";
             try {
-				request.setAttribute("workex", workservice.getWorkexDetails());
+				request.setAttribute("workex", workservice.getWorkexDetails(email_id));
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}    
         } else if (action.equalsIgnoreCase("edit")){
             forward = "/user_workex.jsp";
-            int userId = Integer.parseInt(request.getParameter("user_id"));
+            int userId = Integer.parseInt(request.getParameter("userId"));
             WorkExperienceModel workmodel = null;
 			try {
 				workmodel = workservice.editWorkex(userId);
@@ -68,7 +70,7 @@ public class WorkExperience extends HttpServlet {
         }else if (action.equalsIgnoreCase("listWorkExperience")){
             forward = "/user_profile.jsp";
             try {
-				request.setAttribute("workex", workservice.getWorkexDetails());
+				request.setAttribute("workex", workservice.getWorkexDetails(email_id));
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -87,6 +89,7 @@ public class WorkExperience extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		WorkExperienceModel workmodel = new WorkExperienceModel();
 		HttpSession session = request.getSession();
+		String email_id = (String) session.getAttribute("email_id");
 		workmodel.setEmail_id((String) session.getAttribute("email_id"));
 		workmodel.setTitle(request.getParameter("title"));
 		workmodel.setOrganization_name(request.getParameter("organization_name"));
@@ -117,7 +120,7 @@ public class WorkExperience extends HttpServlet {
         
         RequestDispatcher view = request.getRequestDispatcher("/user_profile.jsp");
         try {
-			request.setAttribute("workex", workservice.getWorkexDetails());
+			request.setAttribute("workex", workservice.getWorkexDetails(email_id));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -1,7 +1,7 @@
 package com.jobportal.models;
 
 public class EducationModel {
-	private String user_id;
+	private int user_id;
 	private String email_id;
 	private String institution;
 	private String level;
@@ -11,10 +11,10 @@ public class EducationModel {
 	private String edu_to;
 	
 	
-	public String getUser_id() {
+	public int getUser_id() {
 		return user_id;
 	}
-	public void setUser_id(String user_id) {
+	public void setUser_id(int user_id) {
 		this.user_id = user_id;
 	}
 	public String getEmail_id() {

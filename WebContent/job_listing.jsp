@@ -5,14 +5,12 @@
 <%@page import="java.sql.PreparedStatement" %>
 
 <%
-
 	if(session.getAttribute("email_id") == null){
 		response.sendRedirect("login_required.jsp");
 	}
 	if(session.getAttribute("member_type") == "Employer"){
 		response.sendRedirect("unauthorized_access.jsp");
 	}
-
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -116,7 +114,7 @@
 			String driver = "com.mysql.jdbc.Driver";
 			String url = "jdbc:mysql://localhost:3306/placement";
 			String username = "root";
-			String password = "root";
+			String password = "";
 		
 			Class.forName(driver);
 			
@@ -136,6 +134,12 @@
             <h5>Application Deadline<%=resultSet.getString("deadline") %></h5>
             <h5>Employer Contact:<%=resultSet.getString("emp_id") %></h5> -->
             <h6>Job Id:<%=resultSet.getString("job_id") %></h6>
+            <%
+            request.setAttribute("job_id", resultSet.getString("job_id"));
+            request.setAttribute("user_id", session.getAttribute("user_id"));
+            %>
+            <input type="submit" value="Apply" class="btn btn-success">
+            </form>
         </li><hr id="hrline">
         <%
 			}

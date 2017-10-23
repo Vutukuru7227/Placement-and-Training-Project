@@ -10,27 +10,23 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.jobportal.models.EducationModel;
-import com.jobportal.models.WorkExperienceModel;
-import com.jobportal.services.user.EducationService;
+import com.jobportal.models.SkillsModel;
+import com.jobportal.services.user.SkillsService;
 
 /**
- * Servlet implementation class Education
+ * Servlet implementation class Skills
  */
-@WebServlet("/Education")
-public class Education extends HttpServlet {
+@WebServlet("/Skills")
+public class Skills extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
-    private EducationService eduservice;
-
-       
+    private SkillsService skills;
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Education() {
+    public Skills() {
         super();
         // TODO Auto-generated constructor stub
-        eduservice = new EducationService();
+        skills = new SkillsService();
     }
 
 	/**
@@ -45,39 +41,39 @@ public class Education extends HttpServlet {
         if (action.equalsIgnoreCase("delete")){
             int userId = Integer.parseInt(request.getParameter("userId"));
             try {
-            	eduservice.deleteEducation(userId);
+            	skills.deleteSkill(userId);
 			} catch (Exception e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
             forward = "/user_profile.jsp";
             try {
-				request.setAttribute("education", eduservice.getEducationDetails(email_id));
+				request.setAttribute("skills", skills.getSkillDetails(email_id));
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}    
         } else if (action.equalsIgnoreCase("edit")){
-            forward = "/user_education.jsp";
+            forward = "/user_skills.jsp";
             int userId = Integer.parseInt(request.getParameter("userId"));
-            EducationModel edumodel = null;
+            SkillsModel skillmodel = null;
 			try {
-				edumodel = eduservice.editEducation(userId);
+				skillmodel = skills.editSkill(userId);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-            request.setAttribute("edumodel", edumodel);
-        }else if (action.equalsIgnoreCase("listEducation")){
+            request.setAttribute("skillmodel", skillmodel);
+        }else if (action.equalsIgnoreCase("listSkills")){
             forward = "/user_profile.jsp";
             try {
-				request.setAttribute("education", eduservice.getEducationDetails(email_id));
+				request.setAttribute("skills", skills.getSkillDetails(email_id));
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
         }  else {
-            forward = "/user_education.jsp";
+            forward = "/user_skills.jsp";
         }
 
         RequestDispatcher view = request.getRequestDispatcher(forward);
@@ -88,31 +84,28 @@ public class Education extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		EducationModel edumodel = new EducationModel();
+		SkillsModel skillmodel = new SkillsModel();
 		HttpSession session = request.getSession();
 		String email_id = (String) session.getAttribute("email_id");
-		edumodel.setEmail_id((String) session.getAttribute("email_id"));
-		edumodel.setInstitution(request.getParameter("institution"));
-		edumodel.setLevel(request.getParameter("level"));
-		edumodel.setGpa(request.getParameter("gpa"));
-		edumodel.setMajor(request.getParameter("major"));
-		edumodel.setEdu_from(request.getParameter("edu_from"));
-		edumodel.setEdu_to(request.getParameter("edu_to"));
+		skillmodel.setEmail_id((String) session.getAttribute("email_id"));
+		skillmodel.setCategory(request.getParameter("category"));
+		skillmodel.setSkill(request.getParameter("skill"));
+		
 		
 		String userid = request.getParameter("user_id");
         if(userid == null || userid.isEmpty())
         {
             try {
-				eduservice.addEducation(edumodel);
+				skills.addSkill(skillmodel);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
         }else
         {
-        	edumodel.setUser_id(Integer.parseInt(userid));
+        	skillmodel.setUser_id(Integer.parseInt(userid));
             try {
-            	eduservice.updateEducation(edumodel);
+            	skills.updateSkill(skillmodel);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -121,7 +114,7 @@ public class Education extends HttpServlet {
         
         RequestDispatcher view = request.getRequestDispatcher("/user_profile.jsp");
         try {
-			request.setAttribute("education", eduservice.getEducationDetails(email_id));
+			request.setAttribute("skills", skills.getSkillDetails(email_id));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -130,5 +123,4 @@ public class Education extends HttpServlet {
        
 		
 	}
-
 }

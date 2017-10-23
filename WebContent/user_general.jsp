@@ -95,28 +95,21 @@
 	  <h2 class="text-center">Hello <%=username%>!</h2>
 	  <h4 class="text-center"><%=email%></h4>
 
-	  <h2>Add/Edit Education Details</h2>
+	  <h2>Add/Edit General Info</h2>
 	  
 	  <div class="container">
-	  <form id="" method="POST" action="Education">
+	  <form id="" method="POST" action="GeneralInfo">
 	  	  <input type="text" readonly="readonly" name="user_id" placeholder="not editable"
-            value="<c:out value="${edumodel.user_id}" />" style="display:none;" /> <br /> 
+            value="<c:out value="${generalmodel.user_id}" />" style="display:none;" /> <br /> 
              	
-          <label>University</label><br>
-          <input type="text" name="institution" id="" value="<c:out value="${edumodel.institution}" />"><br>
+          <label>Primary Phone</label><br>
+          <input type="text" name="phone_no" id="phone_no" value="<c:out value='${generalmodel.phone_no}' />"><br>
 
-          <label>Degree</label><br>
-          <input type="text" name="level" id="" value="<c:out value="${edumodel.level}" />"><br>
+          <label>Address</label><br>
+          <input type="text" name="address" id="address" placeholder="Street/Apt No."value="<c:out value='${generalmodel.address}' />" ><br>
 
-          <label>Major</label><br>
-          <input type="text" name="major" id="" value="<c:out value="${edumodel.major}" />" ><br>
-
-          <label>GPA</label><br>
-          <input type="text" name="gpa" id="" value="<c:out value="${edumodel.gpa}" />"><br>
-
-          <label>Time Period</label><br>
-          From: <input type="number" name="edu_from" id="" min="2000" max="2017" value="<c:out value="${edumodel.edu_from}" />"> 
-          To (or expected): <input type="number" name="edu_to" id="" min="2000" max="2024" value="<c:out value="${edumodel.edu_to}" />">
+          <label>Zipcode</label><br>
+          <input type="text" name="zip_code" id="zip_code" value="<c:out value='${generalmodel.zip_code}' />"><br>
           <br>
           
           <button type="submit" class="btn btn-success">Save</button>

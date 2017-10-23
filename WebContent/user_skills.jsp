@@ -71,12 +71,12 @@
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <form class="navbar-form navbar-left">
+      <!--  <form class="navbar-form navbar-left">
         <div class="form-group">
           <input type="text" class="form-control" placeholder="Search" style="border-radius: 2px">
         </div>
         <button type="submit" class="btn btn-default" style="border-radius: 2px">Submit</button>
-      </form>
+      </form>-->
       <ul class="nav navbar-nav navbar-right">
         <li><a href="user_home_page.jsp">Home</a></li>
         <li><a href="#">Training</a></li>
@@ -94,29 +94,31 @@
 	  %>
 	  <h2 class="text-center">Hello <%=username%>!</h2>
 	  <h4 class="text-center"><%=email%></h4>
+
+	  <h2>Add/Edit Your Skills</h2>
 	  
-	  <form id="" method="POST" action="Education">
-          <label>University</label><br>
-          <input type="text" name="institution" id=""><br>
-
-          <label>Degree</label><br>
-          <input type="text" name="level" id=""><br>
-
-          <label>Major</label><br>
-          <input type="text" name="major" id=""><br>
-
-          <label>GPA</label><br>
-          <input type="text" name="gpa" id=""><br>
-
-          <label>Time Period</label><br>
-          From: <input type="number" name="edu_from" id="" min="2000" max="2017"> 
-          To (or expected): <input type="number" name="edu_to" id="" min="2000" max="2024">
+	  <div class="container">
+	  <form id="" method="POST" action="Skills">
+	  	  <input type="text" readonly="readonly" name="user_id" placeholder="not editable"
+            value="<c:out value="${skillmodel.user_id}" />" style="display:none;"/> <br /> 
+             	
+          <label>Skill Category</label><br>
+          <select name="category">
+          	<option value="<c:out value="${skillmodel.category}" />"><c:out value="${skillmodel.category}" /></option>
+  			<option value="Programming">Programming</option>
+  			<option value="Databases">Databases</option>
+  			<option value="Operating Systems">Operating Systems</option>
+  			<option value="Network Protocols">Network Protocols</option>
+ 			<option value="Others">Others</option>
+		</select><br>
+          <label>Skill</label><br>
+          <input type="text" name="skill" id="" placeholder="Ex:- Java" value="<c:out value="${skillmodel.skill}" />">
           <br>
           
-          <input type="submit" value="Submit">
-
+          <button type="submit" class="btn btn-success">Save</button>
+     
         </form>
-	  <br>
+	  </div>
 	  
 <footer>
 <div class="copyright" style="min-height:40px; background-color:#000000;">
@@ -138,4 +140,4 @@
 </div>
 </footer>
 </body>
-</html>	  
+</html>

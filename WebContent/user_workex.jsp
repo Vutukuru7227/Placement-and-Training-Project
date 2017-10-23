@@ -95,17 +95,17 @@
 	  <h2 class="text-center">Hello <%=username%>!</h2>
 	  <h4 class="text-center"><%=email%></h4>
 
-	  <h2>Add/Edit Education Details</h2>
+	  <h2>Add/Edit Work Experience Details</h2>
 	  
 	  <div class="container">
 	  <form id="" method="POST" action="WorkExperience">
-	  	  <label>ID</label> <input type="text" readonly="readonly" name="user_id" placeholder="not editable"
-            value="<c:out value="${workmodel.user_id}" />" /> <br /> 
+	  	  <input type="text" readonly="readonly" name="user_id" placeholder="not editable"
+            value="<c:out value="${workmodel.user_id}" />" style="display:none;"/> <br /> 
              	
           <label>Title of the position</label><br>
           <input type="text" name="title" id="" value="<c:out value="${workmodel.title}" />"><br>
 
-          <label>Organisation Name</label><br>
+          <label>Organization Name</label><br>
           <input type="text" name="organization_name" id="" value="<c:out value="${workmodel.organization_name}" />"><br>
 
           <label>Location</label><br>
@@ -116,7 +116,7 @@
           To: <input type="number" name="exp_to" id="" min="2000" max="2024" value="<c:out value="${workmodel.exp_to}" />"><br>
 
           <label>Achievements</label><br>
-          <textarea rows="4" cols="50"></textarea>
+          <textarea rows="4" cols="50" name="achievements" value="<c:out value="${workmodel.achievements}" />"></textarea>
           <br>
           
           <button type="submit" class="btn btn-success">Save</button>

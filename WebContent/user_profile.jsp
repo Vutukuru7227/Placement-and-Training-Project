@@ -93,338 +93,142 @@
 	  	String email = (String) session.getAttribute("email_id");
 	  %>
 	  <h2 class="text-center">Hello <%=username%>!</h2>
-	  <h4 class="text-center"><%=email%></h4>
+	  <h4 class="text-center"><%=email%></h4><br>
 
 <!-- General Information -->
+<h4 class="text-center">General Information</h4>
 <div class="container">
+<span style="float: right;">
+<a href="GeneralInfo?action=insert">
+        <button type="button" class="btn btn-primary">Add General Info
+        </button></a>
+      </span>
   <table class="table table-bordered table-condensed" align="center" style="background-color: white; max-width: 800px">
-    <tr>
-      <th>General Details</th>
-    </tr>
+    <c:forEach items="${general}" var="info">
     <tr>
       <td>
-        <!-- General Information Goes here -->
-        <span style="float: right;">
-        <button type="button" class="btn btn-default glyphicon glyphicon-pencil" data-toggle="modal" data-target="#editGenModal">
-        </button>
-      </span>
-      </td>
-    </tr>
-  </table>
-</div>
-
-<!-- Edit GenModal-->
-<div class="modal fade" id="editGenModal" tabindex="-1" role="dialog" aria-labelledby="editGenModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel"><b>Add General Details</b></h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
+      <b>Phone No.:</b> <c:out value="${info.phone_no}" /><br>
+      <b>Address:</b> <c:out value="${info.address}" /><br>
       
+      <b>Zip Code:</b> <c:out value="${info.zip_code}" /><br>
       
-      <div class="modal-body">
-      	
-        <form method="POST" action="UserGeneralInfo">
-          <label>Primary Phone</label><br>
-          <input type="text" name="phone_no" id="phone_no" value="<c:out value='${info.phone_no}' />"><br>
+      </td>
+        <td><span style="float: right;">
+        <a href="GeneralInfo?action=edit&userId=<c:out value="${info.user_id}"/>">
+        <button type="button" class="btn btn-primary glyphicon glyphicon-pencil" >
+        </button></a>
+      </span></td>
+      <td><span style="float: right;">
+      <a href="GeneralInfo?action=delete&userId=<c:out value="${info.user_id}"/>">
+        <button type="button" class="btn btn-danger glyphicon glyphicon-trash">
+        </button></a>
+      </span></td>
+    </tr>
+    </c:forEach>
+  </table>
+</div>
 
-          <label>Address</label><br>
-          <input type="text" name="address" id="address" placeholder="Street/Apt No."value="<c:out value='${info.address}' />" ><br>
 
-          <label>Zipcode</label><br>
-          <input type="text" name="zip_code" id="zip_code" value="<c:out value='${info.zip_code}' />"><br>
-		  
-		  <div class="modal-footer">
-        	<button type="submit" class="btn btn-success">Save</button>
-      	  </div>	
-        </form>
-      </div>
+<!-- Education Details -->
+<h4 class="text-center">Education Details</h4>
+<div class="container">
+<span style="float: right;">
+<a href="Education?action=insert">
+        <button type="button" class="btn btn-primary">Add Education
+        </button></a>
+      </span>
+  <table class="table table-bordered table-condensed" align="center" style="background-color: white; max-width: 800px">
+    <c:forEach items="${education}" var="edu">
+    <tr>
+      <td>
+      <b>School Name:</b> <c:out value="${edu.institution}" /><br>
+      <b>Degree:</b> <c:out value="${edu.level}" /><br>
       
-    </div>
-  </div>
-</div>
-
-
-<!-- Education Information -->
-<div class="container">
-  <table class="table table-bordered table-condensed" align="center" style="background-color: white; max-width: 800px">
-    <tr>
-      <th>Education<span style="float: right;">
-        <button type="button" class="btn btn-default glyphicon glyphicon-plus-sign" data-toggle="modal" data-target="#addEduModal" href="UserEducationInfo?action=insert">
-        </button>
-      </span></th>
-    </tr>
-    <tr>
-      <td>
-        <!-- Education Information Goes here -->
-        <span style="float: right;">
-        <button type="button" class="btn btn-default glyphicon glyphicon-pencil" data-toggle="modal" data-target="#editEduModal" href="UserEducationInfo?action=edit&userId=<c:out value="${user.userid}"/>">
-        </button>
-      </span>
+      <b>Major:</b> <c:out value="${edu.major}" /><br>
+      <b>GPA:</b> <c:out value="${edu.gpa}" /><br>
+      <b>From - To:</b> <c:out value="${edu.edu_from}" /> -
+      <c:out value="${edu.edu_to}" />
       </td>
+        <td><span style="float: right;">
+        <a href="Education?action=edit&userId=<c:out value="${edu.user_id}"/>">
+        <button type="button" class="btn btn-primary glyphicon glyphicon-pencil" >
+        </button></a>
+      </span></td>
+      <td><span style="float: right;">
+      <a href="Education?action=delete&userId=<c:out value="${edu.user_id}"/>">
+        <button type="button" class="btn btn-danger glyphicon glyphicon-trash">
+        </button></a>
+      </span></td>
     </tr>
+    </c:forEach>
   </table>
 </div>
 
-<!-- add EduModal -->
-<div class="modal fade" id="addEduModal" tabindex="-1" role="dialog" aria-labelledby="addEduModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel"><b>Add education</b></h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form id="" method="POST" action="">
-          <label>University</label><br>
-          <input type="text" name="" id=""><br>
 
-          <label>Degree</label><br>
-          <input type="text" name="" id=""><br>
-
-          <label>Major</label><br>
-          <input type="text" name="" id=""><br>
-
-          <label>GPA</label><br>
-          <input type="text" name="" id=""><br>
-
-          <label>Time Period</label><br>
-          From: <input type="number" name="" id="" min="2000" max="2017"> To (or expected): <input type="number" name="" id="" min="2000" max="2024">
-
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-success">Save</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-<!-- Edit EduModal-->
-<div class="modal fade" id="editEduModal" tabindex="-1" role="dialog" aria-labelledby="editEduModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel"><b>Edit education</b></h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form id="" method="POST" action="">
-          <label>University</label><br>
-          <input type="text" name="" id=""><br>
-
-          <label>Degree</label><br>
-          <input type="text" name="" id=""><br>
-
-          <label>Major</label><br>
-          <input type="text" name="" id=""><br>
-
-          <label>GPA</label><br>
-          <input type="text" name="" id=""><br>
-
-          <label>Time Period</label><br>
-          From: <input type="number" name="" id="" min="2000" max="2017"> To (or expected): <input type="number" name="" id="" min="2000" max="2024">
-
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-success">Save</button>
-        <button type="button" class="btn btn-danger" style="float: left;">Delete</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-
-<!-- Work Experience Information -->
+<!-- Work Experience Details -->
+<h4 class="text-center">Work Experience Details</h4>	  
 <div class="container">
+<span style="float: right;">
+<a href="WorkExperience?action=insert">
+        <button type="button" class="btn btn-primary">Add Work Experience
+        </button></a>
+      </span>
   <table class="table table-bordered table-condensed" align="center" style="background-color: white; max-width: 800px">
-    <tr>
-      <th>Work Experience<span style="float: right;">
-        <button type="button" class="btn btn-default glyphicon glyphicon-plus-sign" data-toggle="modal" data-target="#addWorkModal">
-        </button>
-      </span></th>
-    </tr>
+    <c:forEach items="${workex}" var="work">
     <tr>
       <td>
-        <!-- Education Information Goes here -->
-        <span style="float: right;">
-        <button type="button" class="btn btn-default glyphicon glyphicon-pencil" data-toggle="modal" data-target="#editWorkModal">
-        </button>
-      </span>
+      <c:out value="${work.title}" /><br>
+      <c:out value="${work.organization_name}" /><br>
+      <c:out value="${work.location}" /><br>
+      <c:out value="${work.exp_from}" /> -
+      <c:out value="${work.exp_to}" /> <br>
+      <c:out value="${work.achievements}" />
       </td>
+        <td><span style="float: right;">
+        <a href="WorkExperience?action=edit&userId=<c:out value="${work.user_id}"/>">
+        <button type="button" class="btn btn-primary glyphicon glyphicon-pencil" >
+        </button></a>
+      </span></td>
+      <td><span style="float: right;">
+      <a href="WorkExperience?action=delete&userId=<c:out value="${work.user_id}"/>">
+        <button type="button" class="btn btn-danger glyphicon glyphicon-trash">
+        </button></a>
+      </span></td>
     </tr>
+    </c:forEach>
   </table>
 </div>
 
-<!-- add WorkModal -->
-<div class="modal fade" id="addWorkModal" tabindex="-1" role="dialog" aria-labelledby="addWorkModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel"><b>Add Work Experience</b></h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form id="" method="POST" action="">
-          <label>Title of the position</label><br>
-          <input type="text" name="" id=""><br>
 
-          <label>Organisation Name</label><br>
-          <input type="text" name="" id=""><br>
-
-          <label>Location</label><br>
-          <input type="text" name="" id=""><br>
-
-          <label>Time Period</label><br>
-          From: <input type="number" name="" id="" min="2000" max="2017"> To: <input type="number" name="" id="" min="2000" max="2024"><br>
-
-          <label>Achievements</label><br>
-          <textarea rows="4" cols="50"></textarea>
-
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-success">Save</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-<!-- Edit WorkModal-->
-<div class="modal fade" id="editWorkModal" tabindex="-1" role="dialog" aria-labelledby="editWorkModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel"><b>Edit Work Experience</b></h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form id="" method="POST" action="">
-          <label>Title of the position</label><br>
-          <input type="text" name="" id=""><br>
-
-          <label>Organisation Name</label><br>
-          <input type="text" name="" id=""><br>
-
-          <label>Location</label><br>
-          <input type="text" name="" id=""><br>
-
-          <label>Time Period</label><br>
-          From: <input type="number" name="" id="" min="2000" max="2017"> To: <input type="number" name="" id="" min="2000" max="2024"><br>
-
-          <label>Achievements</label><br>
-          <textarea rows="4" cols="50"></textarea>
-
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-success">Save</button>
-        <button type="button" class="btn btn-danger" style="float: left;">Delete</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-<!-- Technical Skills Information -->
+<!-- Skills Details -->
+<h4 class="text-center">Skills</h4>	  
 <div class="container">
+<span style="float: right;">
+<a href="Skills?action=insert">
+        <button type="button" class="btn btn-primary">Add Skill
+        </button></a>
+      </span>
   <table class="table table-bordered table-condensed" align="center" style="background-color: white; max-width: 800px">
-    <tr>
-      <th>Skills<span style="float: right;">
-        <button type="button" class="btn btn-default glyphicon glyphicon-plus-sign" data-toggle="modal" data-target="#addSkillsModal">
-        </button>
-      </span></th>
-    </tr>
+    <c:forEach items="${skills}" var="skill">
     <tr>
       <td>
-        <!-- Technical Skills Goes here -->
-        <span style="float: right;">
-        <button type="button" class="btn btn-default glyphicon glyphicon-pencil" data-toggle="modal" data-target="#editSkillsModal">
-        <button type="button" class="btn btn-danger glyphicon glyphicon-trash" id="">
-        </button>
-      </span>
+      <b><c:out value="${skill.category}" />:</b>
+      <c:out value="${skill.skill}" /><br>
+      
       </td>
+        <td><span style="float: right;">
+        <a href="Skills?action=edit&userId=<c:out value="${skill.user_id}"/>">
+        <button type="button" class="btn btn-primary glyphicon glyphicon-pencil" >
+        </button></a>
+      </span></td>
+      <td><span style="float: right;">
+      <a href="Skills?action=delete&userId=<c:out value="${skill.user_id}"/>">
+        <button type="button" class="btn btn-danger glyphicon glyphicon-trash">
+        </button></a>
+      </span></td>
     </tr>
+    </c:forEach>
   </table>
-</div>
-
-<!-- add SkillsModal -->
-<div class="modal fade" id="addSkillsModal" tabindex="-1" role="dialog" aria-labelledby="addSkillsModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel"><b>Add Skill</b></h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form id="" method="POST" action="">
-          <label>Skill Category</label><br>
-          <select>
-  			<option value="Programming">Programming</option>
-  			<option value="Frameworks">Frameworks</option>
-  			<option value="Operating Systems">Operating Systems</option>
-  			<option value="Protocols">Protocols</option>
- 			<option value="Others">Others</option>
-		</select><br>
-          <label>Skill</label><br>
-          <input type="text" name="" id="" placeholder="Ex:- Java">
-
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-success">Save</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-<!-- Edit SkillsModal-->
-<div class="modal fade" id="editSkillsModal" tabindex="-1" role="dialog" aria-labelledby="editSkillsModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel"><b>Edit Technical Skill</b></h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form id="" method="POST" action="">
-          <label>Skill</label><br>
-          <input type="text" name="" id="">
-
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-success">Save</button>
-        <button type="button" class="btn btn-danger" style="float: left;">Delete</button>
-      </div>
-    </div>
-  </div>
 </div>
 
 <footer>
