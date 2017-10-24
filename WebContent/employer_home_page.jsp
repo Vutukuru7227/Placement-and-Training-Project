@@ -59,7 +59,11 @@ if(session.getAttribute("email_id") == null){
       </form>-->
       <ul class="nav navbar-nav navbar-right">
         <li><a href="employer_home_page.jsp">Home</a></li>
-        <li><a href="#">Jobs Posted</a></li>
+        <% 
+        		String emp_id = session.getAttribute("email_id").toString();
+        		request.setAttribute("emp_id", emp_id);
+        	%>
+        <li><a href="JobPosting?emp_id=<%=emp_id %>">Jobs Posted</a></li>
 		<li><a href="#">Account</a></li>
 		<li><a href="logout.jsp">Logout</a></li>
       </ul>

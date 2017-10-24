@@ -6,6 +6,8 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
 
 import com.jobportal.models.JobPostModel;
 import com.jobportal.repository.IEmployee;
@@ -69,5 +71,38 @@ public class JobPostingService implements IEmployee{
 	public java.sql.Date convertJavaDateToSqlDate(java.util.Date date) {
 	    return new java.sql.Date(date.getTime());
 	}
+	
+	
+	public ArrayList<JobPostModel> getJobIds(String emp_id){
+		ArrayList<Integer> jobIds = new ArrayList<Integer>();
+		ArrayList<JobPostModel> jobs = new ArrayList<JobPostModel>();
 
+		String sql = "select * "
+				+ "FROM job_postings j"
+				+ " WHERE emp_id = ?";
+			
+		try {
+			Connection connection = getConnection();
+			PreparedStatement ps = connection.prepareStatement(sql);
+			
+			ps.setString(1, emp_id);				
+			ResultSet rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				JobPostModel model = new JobPostModel();
+				model.setJob_id(rs.getInt("job_id"));
+				model.setEmp_id(rs.getString("emp_id"));
+				model.setCompany(rs.getString("company_name"));
+				model.setLocation(rs.getString("location"));
+				model.setJob_title(rs.getString("job_title"));
+				model.setJob_description(rs.getString("job_description"));
+				model.setDeadline(rs.getDate("deadline"));
+				jobs.add(model);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}	
+		return jobs;
+
+}
 }

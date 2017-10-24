@@ -80,10 +80,9 @@
   <p class="text-center"><a class="btn btn-primary btn-lg" href="user_profile.html" role="button">Learn more by creating your profile page!</a></p><br><br>
   <p class="text-center"><a class="btn btn-primary btn-lg" href="job_listing.jsp" role="button">View your Future job here first!</a></p>
   
-</div>
-
-
-  
+</div>  
 </div>
 </body>
+<script type="text/javascript">
+</script>
 </html>

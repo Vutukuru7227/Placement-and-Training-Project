@@ -4,15 +4,18 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 import static java.lang.System.*;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.sql.rowset.Joinable;
 
 import com.jobportal.models.JobPostModel;
 import com.jobportal.services.employee.JobPostingService;
@@ -36,7 +39,21 @@ public class JobPosting extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		
+		out.println("Reached here with emp id "+request.getParameter("emp_id"));
+		JobPostingService jobListingService = new JobPostingService();
+		ArrayList<JobPostModel> jobs = new ArrayList<JobPostModel>();
+		
+		try {
+			jobs = jobListingService.getJobIds(request.getParameter("emp_id").toString());
+			request.setAttribute("jobsPosted", jobs);
+			
+		}catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		RequestDispatcher dispatcher = request.getRequestDispatcher("jobs_posted.jsp");
+		dispatcher.include(request, response);
 	}
 
 	/**
