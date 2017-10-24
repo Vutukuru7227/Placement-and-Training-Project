@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.jobportal.models.ApplicationModel;
 import com.jobportal.services.user.ApplyService;
@@ -31,8 +32,27 @@ public class Apply extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		HttpSession session = request.getSession();
+        String email_id = (String) session.getAttribute("email_id");
+        
+        int job_id = Integer.parseInt(request.getParameter("job_id"));
+		System.out.println("Job ID"+job_id);
+		//System.out.println("emailID"+email_id);
+		ApplicationModel model = new ApplicationModel();
+		model.setJob_id(job_id);
+		model.setEmail_id(email_id);
+		
+		ApplyService applyService = new ApplyService();
+		boolean result = applyService.Apply(model);
+		if(result){
+			RequestDispatcher dispatcher = request.getRequestDispatcher("apply_success.jsp");
+			dispatcher.include(request, response);
+		}
+		else{
+			RequestDispatcher dispatcher = request.getRequestDispatcher("error.jsp");
+			dispatcher.include(request, response);
+		}
+		
 	}
 
 	/**
@@ -41,23 +61,7 @@ public class Apply extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		int job_id = Integer.parseInt(request.getAttribute("job_id").toString());
-		String user_id = request.getAttribute("user_id").toString();
-		
-		ApplicationModel model = new ApplicationModel();
-		model.setJob_id(job_id);
-		model.setUser_id(user_id);
-		
-		ApplyService applyService = new ApplyService();
-		boolean result = applyService.Apply(model);
-		if(result){
-			RequestDispatcher dispatcher = request.getRequestDispatcher("user_home_page.jsp");
-			dispatcher.include(request, response);
-		}
-		else{
-			RequestDispatcher dispatcher = request.getRequestDispatcher("error.jsp");
-			dispatcher.include(request, response);
-		}
+		//int job_id = Integer.parseInt(request.getAttribute("job_id").toString());
 		
 		
 	}

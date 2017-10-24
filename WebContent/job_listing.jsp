@@ -124,22 +124,21 @@
 			PreparedStatement ps = connection.prepareStatement(sql);
 			
 			ResultSet resultSet = ps.executeQuery(sql);
-			
+			int c=1;
 			while(resultSet.next()){
 		%>
             <a href=""><h3 style="color: blue"><%=resultSet.getString("job_title") %></h3></a>
             <h4>Company:<%=resultSet.getString("company_name") %></h4>
             <h4>Location: <%=resultSet.getString("location") %></h4>
-            <!--<p>Job Description:<%=resultSet.getString("job_description") %></p>
-            <h5>Application Deadline<%=resultSet.getString("deadline") %></h5>
-            <h5>Employer Contact:<%=resultSet.getString("emp_id") %></h5> -->
+            <p>Job Description:<%=resultSet.getString("job_description") %></p>
+            <!-- <h5>Application Deadline<%=resultSet.getString("deadline") %></h5>
+             <h5>Employer Contact:<%=resultSet.getString("emp_id") %></h5> -->
             <h6>Job Id:<%=resultSet.getString("job_id") %></h6>
-            <%
-            request.setAttribute("job_id", resultSet.getString("job_id"));
-            request.setAttribute("user_id", session.getAttribute("user_id"));
-            %>
-            <input type="submit" value="Apply" class="btn btn-success">
-            </form>
+           
+         	<a href="Apply?job_id=<%=resultSet.getString("job_id") %>">
+        <button type="button" class="btn btn-primary" > Apply 
+        </button></a>
+        	
         </li><hr id="hrline">
         <%
 			}

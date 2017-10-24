@@ -34,18 +34,18 @@ public class ApplyService {
 		
 		try{
 			PreparedStatement ps = getConnection()
-                    .prepareStatement("insert into application_details (user_id,job_id");
+                    .prepareStatement("insert into application_details (email_id,job_id) values (?, ?)");
 			
-			ps.setString(1, model.getUser_id());
+			ps.setString(1, model.getEmail_id());
 			ps.setInt(2, model.getJob_id());
 			
 			ps.executeUpdate();
 			
 			result = true;
-			return result;
 			
 		}catch (Exception e) {
 			e.printStackTrace();
+			result = false;
 			// TODO: handle exception
 		}
 		return result;
