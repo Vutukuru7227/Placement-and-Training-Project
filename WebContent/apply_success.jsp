@@ -1,8 +1,19 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%
+
+	if(session.getAttribute("email_id") == null){
+		response.sendRedirect("login.jsp");
+	}
+	if(session.getAttribute("member_type") == "Employer"){
+		response.sendRedirect("unauthorized_access.jsp");
+	}
+
+%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Success</title>
+    <title>Training and Placement Job Portal</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE = edge">
     <meta name="viewport" content="width = device-width, initial-scale = 1">
@@ -39,17 +50,34 @@
       <a class="navbar-brand" href="profile.jsp" style="color: white">SYNTHESIZE</a>
     </div>
 
-   
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <!--  <form class="navbar-form navbar-left">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Search" style="border-radius: 2px">
+        </div>
+        <button type="submit" class="btn btn-default" style="border-radius: 2px">Submit</button>
+      </form>-->
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="user_home_page.jsp">Home</a></li>
+        <li><a href="#">Training</a></li>
+        <li><a href="job_listing.jsp">Jobs</a></li>
+		<li><a href="user_account.jsp">Account</a></li>
+		<li><a href="logout.jsp">Logout</a></li>
+        
+      </ul>
+    </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
 
 
 <div class="jumbotron">
-  <p class="text-center">Application sent successfully!</p>
-</div>
-
-
+  
+  <p class="text-center">Your Application Sent Successfully !</p>
+  <p class="text-center"><a class="btn btn-primary btn-lg" href="user_home_page.jsp" role="button">Go to your Home Page!</a></p><br><br>
+  
   
 </div>
+
 </body>
 </html>

@@ -14,7 +14,7 @@ if(session.getAttribute("email_id") == null){
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Unauthorized Access</title>
+    <title>View Jobs Posted</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE = edge">
     <meta name="viewport" content="width = device-width, initial-scale = 1">
@@ -78,7 +78,7 @@ if(session.getAttribute("email_id") == null){
     <c:forEach var="job" items="${jobsPosted}">
     <tr>
       <td>
-      <b>Job Id:</b> <a href="ViewJobs?job_id=<c:out value="${job.job_id}"/>"><c:out value="${job.job_id}"/></a><br>
+      <b>Job Id:</b> <c:out value="${job.job_id}"/><br>
       </td>
       
       <td>
@@ -99,6 +99,12 @@ if(session.getAttribute("email_id") == null){
       
       <td>
       <b>Job Description:</b> <c:out value="${job.job_description}"/><br>
+      </td>
+      
+      <td>
+      <a href="ViewJobs?job_id=<c:out value="${job.job_id}"/>">
+        <button type="button" class="btn btn-primary" > View Applicants
+        </button></a>
       </td>
     </tr>
     </c:forEach>
