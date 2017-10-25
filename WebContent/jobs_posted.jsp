@@ -1,4 +1,6 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%
 
 if(session.getAttribute("email_id") == null){
@@ -72,20 +74,36 @@ if(session.getAttribute("email_id") == null){
 </nav>
 
 
-	<%
-		String username = (String) session.getAttribute("username");
-		String email_id = (String) session.getAttribute("email_id");
-		request.setAttribute("email_id", email_id);
-	%>
-
-<div class="jumbotron">
-  <h2 class="text-center">Hello <%=username%>!</h2>
-  <p class="text-center">Welcome to Training and Placement Job Portal site</p>
-  <p class="text-center"><a class="btn btn-primary btn-lg" href="job_posting_screen.jsp" role="button">Post a New Job!</a></p>
-</div>
-
-
+  <table class="table table-bordered table-condensed" align="center" style="background-color: white; max-width: 800px">
+    <c:forEach var="job" items="${jobsPosted}">
+    <tr>
+      <td>
+      <b>Job Id:</b> <a href="ViewJobs?job_id=<c:out value="${job.job_id}"/>"><c:out value="${job.job_id}"/></a><br>
+      </td>
+      
+      <td>
+      <b>Employee Id:</b> <c:out value="${job.emp_id}"/><br>
+      </td>
+      
+      <td>
+      <b>Company Name:</b> <c:out value="${job.company}"/><br>
+      </td>
+      
+      <td>
+      <b>Location:</b> <c:out value="${job.location}"/><br>
+      </td>
+      
+      <td>
+      <b>Job title:</b> <c:out value="${job.job_title}"/><br>
+      </td>
+      
+      <td>
+      <b>Job Description:</b> <c:out value="${job.job_description}"/><br>
+      </td>
+    </tr>
+    </c:forEach>
+  </table>
   
-</div>
+  
 </body>
 </html>

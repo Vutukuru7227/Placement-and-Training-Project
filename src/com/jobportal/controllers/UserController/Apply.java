@@ -36,7 +36,7 @@ public class Apply extends HttpServlet {
         String email_id = (String) session.getAttribute("email_id");
         
         int job_id = Integer.parseInt(request.getParameter("job_id"));
-		System.out.println("Job ID"+job_id);
+		//System.out.println("Job ID"+job_id);
 		//System.out.println("emailID"+email_id);
 		ApplicationModel model = new ApplicationModel();
 		model.setJob_id(job_id);

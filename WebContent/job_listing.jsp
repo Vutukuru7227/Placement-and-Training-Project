@@ -96,7 +96,7 @@
         <li><a href="user_home_page.jsp">Home</a></li>
         <li><a href="#">Training</a></li>
         <li><a href="job_listing.jsp">Jobs</a></li>
-		<li><a href="user_profile.jsp">Account</a></li>
+		<li><a href="user_account.jsp">Account</a></li>
 		<li><a href="logout.jsp">Logout</a></li>
       </ul>
     </div><!-- /.navbar-collapse -->

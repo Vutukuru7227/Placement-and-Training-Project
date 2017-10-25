@@ -49,7 +49,7 @@ public class WorkExperience extends HttpServlet {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-            forward = "/user_profile.jsp";
+            forward = "/user_account.jsp";
             try {
 				request.setAttribute("workex", workservice.getWorkexDetails(email_id));
 			} catch (Exception e) {
@@ -67,15 +67,7 @@ public class WorkExperience extends HttpServlet {
 				e.printStackTrace();
 			}
             request.setAttribute("workmodel", workmodel);
-        }else if (action.equalsIgnoreCase("listWorkExperience")){
-            forward = "/user_profile.jsp";
-            try {
-				request.setAttribute("workex", workservice.getWorkexDetails(email_id));
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-        }  else {
+        } else {
             forward = "/user_workex.jsp";
         }
 
@@ -118,7 +110,7 @@ public class WorkExperience extends HttpServlet {
 			}
         }
         
-        RequestDispatcher view = request.getRequestDispatcher("/user_profile.jsp");
+        RequestDispatcher view = request.getRequestDispatcher("/user_account.jsp");
         try {
 			request.setAttribute("workex", workservice.getWorkexDetails(email_id));
 		} catch (Exception e) {

@@ -46,7 +46,7 @@ public class Skills extends HttpServlet {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-            forward = "/user_profile.jsp";
+            forward = "/user_account.jsp";
             try {
 				request.setAttribute("skills", skills.getSkillDetails(email_id));
 			} catch (Exception e) {
@@ -64,15 +64,7 @@ public class Skills extends HttpServlet {
 				e.printStackTrace();
 			}
             request.setAttribute("skillmodel", skillmodel);
-        }else if (action.equalsIgnoreCase("listSkills")){
-            forward = "/user_profile.jsp";
-            try {
-				request.setAttribute("skills", skills.getSkillDetails(email_id));
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-        }  else {
+        }else {
             forward = "/user_skills.jsp";
         }
 
@@ -112,7 +104,7 @@ public class Skills extends HttpServlet {
 			}
         }
         
-        RequestDispatcher view = request.getRequestDispatcher("/user_profile.jsp");
+        RequestDispatcher view = request.getRequestDispatcher("/user_account.jsp");
         try {
 			request.setAttribute("skills", skills.getSkillDetails(email_id));
 		} catch (Exception e) {

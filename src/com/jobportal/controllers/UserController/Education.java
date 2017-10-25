@@ -50,7 +50,7 @@ public class Education extends HttpServlet {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-            forward = "/user_profile.jsp";
+            forward = "/user_account.jsp";
             try {
 				request.setAttribute("education", eduservice.getEducationDetails(email_id));
 			} catch (Exception e) {
@@ -68,15 +68,7 @@ public class Education extends HttpServlet {
 				e.printStackTrace();
 			}
             request.setAttribute("edumodel", edumodel);
-        }else if (action.equalsIgnoreCase("listEducation")){
-            forward = "/user_profile.jsp";
-            try {
-				request.setAttribute("education", eduservice.getEducationDetails(email_id));
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-        }  else {
+        }else {
             forward = "/user_education.jsp";
         }
 
@@ -119,7 +111,7 @@ public class Education extends HttpServlet {
 			}
         }
         
-        RequestDispatcher view = request.getRequestDispatcher("/user_profile.jsp");
+        RequestDispatcher view = request.getRequestDispatcher("/user_account.jsp");
         try {
 			request.setAttribute("education", eduservice.getEducationDetails(email_id));
 		} catch (Exception e) {

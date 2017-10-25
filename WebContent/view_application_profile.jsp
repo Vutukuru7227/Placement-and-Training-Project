@@ -4,10 +4,10 @@
 
 <%
 
-	if(session.getAttribute("email_id") == null){
-		response.sendRedirect("login.jsp");
-	}
-	if(session.getAttribute("member_type") == "Employer"){
+if(session.getAttribute("email_id") == null){
+	response.sendRedirect("login.jsp");
+}
+	if(session.getAttribute("member_type") == "Applicant"){
 		response.sendRedirect("unauthorized_access.jsp");
 	}
 
@@ -81,28 +81,18 @@
         <li><a href="user_home_page.jsp">Home</a></li>
         <li><a href="#">Training</a></li>
         <li><a href="job_listing.jsp">Jobs</a></li>
-		<li><a href="user_account.jsp">Account</a></li>
+		<li><a href="user_profile.jsp">Account</a></li>
 		<li><a href="logout.jsp">Logout</a></li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
 
-	  <%
-		String username = (String) session.getAttribute("username");
-	  	String email = (String) session.getAttribute("email_id");
-	  %>
-	  <h2 class="text-center">Hello <%=username%>!</h2>
-	  <h4 class="text-center"><%=email%></h4><br>
+<h2 class="text-center">Applicant Details</h2>
 
 <!-- General Information -->
 <h4 class="text-center">General Information</h4>
 <div class="container">
-<span style="float: right;">
-<a href="GeneralInfo?action=insert">
-        <button type="button" class="btn btn-primary">Add General Info
-        </button></a>
-      </span>
   <table class="table table-bordered table-condensed" align="center" style="background-color: white; max-width: 800px">
     <c:forEach items="${general}" var="info">
     <tr>
@@ -112,31 +102,15 @@
       
       <b>Zip Code:</b> <c:out value="${info.zip_code}" /><br>
       
-      </td>
-        <td><span style="float: right;">
-        <a href="GeneralInfo?action=edit&userId=<c:out value="${info.user_id}"/>">
-        <button type="button" class="btn btn-primary glyphicon glyphicon-pencil" >
-        </button></a>
-      </span></td>
-      <td><span style="float: right;">
-      <a href="GeneralInfo?action=delete&userId=<c:out value="${info.user_id}"/>">
-        <button type="button" class="btn btn-danger glyphicon glyphicon-trash">
-        </button></a>
-      </span></td>
     </tr>
     </c:forEach>
   </table>
 </div>
 
-
 <!-- Education Details -->
 <h4 class="text-center">Education Details</h4>
 <div class="container">
-<span style="float: right;">
-<a href="Education?action=insert">
-        <button type="button" class="btn btn-primary">Add Education
-        </button></a>
-      </span>
+
   <table class="table table-bordered table-condensed" align="center" style="background-color: white; max-width: 800px">
     <c:forEach items="${education}" var="edu">
     <tr>
@@ -149,30 +123,15 @@
       <b>From - To:</b> <c:out value="${edu.edu_from}" /> -
       <c:out value="${edu.edu_to}" />
       </td>
-        <td><span style="float: right;">
-        <a href="Education?action=edit&userId=<c:out value="${edu.user_id}"/>">
-        <button type="button" class="btn btn-primary glyphicon glyphicon-pencil" >
-        </button></a>
-      </span></td>
-      <td><span style="float: right;">
-      <a href="Education?action=delete&userId=<c:out value="${edu.user_id}"/>">
-        <button type="button" class="btn btn-danger glyphicon glyphicon-trash">
-        </button></a>
-      </span></td>
+        
     </tr>
     </c:forEach>
   </table>
 </div>
 
-
 <!-- Work Experience Details -->
 <h4 class="text-center">Work Experience Details</h4>	  
 <div class="container">
-<span style="float: right;">
-<a href="WorkExperience?action=insert">
-        <button type="button" class="btn btn-primary">Add Work Experience
-        </button></a>
-      </span>
   <table class="table table-bordered table-condensed" align="center" style="background-color: white; max-width: 800px">
     <c:forEach items="${workex}" var="work">
     <tr>
@@ -184,16 +143,6 @@
       <c:out value="${work.exp_to}" /> <br>
       <c:out value="${work.achievements}" />
       </td>
-        <td><span style="float: right;">
-        <a href="WorkExperience?action=edit&userId=<c:out value="${work.user_id}"/>">
-        <button type="button" class="btn btn-primary glyphicon glyphicon-pencil" >
-        </button></a>
-      </span></td>
-      <td><span style="float: right;">
-      <a href="WorkExperience?action=delete&userId=<c:out value="${work.user_id}"/>">
-        <button type="button" class="btn btn-danger glyphicon glyphicon-trash">
-        </button></a>
-      </span></td>
     </tr>
     </c:forEach>
   </table>
@@ -203,29 +152,13 @@
 <!-- Skills Details -->
 <h4 class="text-center">Skills</h4>	  
 <div class="container">
-<span style="float: right;">
-<a href="Skills?action=insert">
-        <button type="button" class="btn btn-primary">Add Skill
-        </button></a>
-      </span>
   <table class="table table-bordered table-condensed" align="center" style="background-color: white; max-width: 800px">
     <c:forEach items="${skills}" var="skill">
     <tr>
       <td>
       <b><c:out value="${skill.category}" />:</b>
       <c:out value="${skill.skill}" /><br>
-      
-      </td>
-        <td><span style="float: right;">
-        <a href="Skills?action=edit&userId=<c:out value="${skill.user_id}"/>">
-        <button type="button" class="btn btn-primary glyphicon glyphicon-pencil" >
-        </button></a>
-      </span></td>
-      <td><span style="float: right;">
-      <a href="Skills?action=delete&userId=<c:out value="${skill.user_id}"/>">
-        <button type="button" class="btn btn-danger glyphicon glyphicon-trash">
-        </button></a>
-      </span></td>
+     </td>
     </tr>
     </c:forEach>
   </table>

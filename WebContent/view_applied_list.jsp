@@ -1,4 +1,6 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%
 
 if(session.getAttribute("email_id") == null){
@@ -71,21 +73,20 @@ if(session.getAttribute("email_id") == null){
   </div><!-- /.container-fluid -->
 </nav>
 
+  <table class="table table-bordered table-condensed" align="center" style="background-color: white; max-width: 800px">
+    <c:forEach var="job" items="${appliedList}">
+    <tr>
+      <td>
+      <b>Job Id:</b><c:out value="${job.job_id}"/><br>
+      </td>
+      <td>
+      <b>Applicant Email-Id:</b> <c:out value="${job.email_id}"/><a href="ViewApplicationProfile?email_id=<c:out value="${job.email_id}"/>">
+        <button type="button" class="btn btn-primary" > View Profile
+        </button></a> <br>
+      </td>
+    </tr>
+    </c:forEach>
+  </table>
 
-	<%
-		String username = (String) session.getAttribute("username");
-		String email_id = (String) session.getAttribute("email_id");
-		request.setAttribute("email_id", email_id);
-	%>
-
-<div class="jumbotron">
-  <h2 class="text-center">Hello <%=username%>!</h2>
-  <p class="text-center">Welcome to Training and Placement Job Portal site</p>
-  <p class="text-center"><a class="btn btn-primary btn-lg" href="job_posting_screen.jsp" role="button">Post a New Job!</a></p>
-</div>
-
-
-  
-</div>
 </body>
 </html>
