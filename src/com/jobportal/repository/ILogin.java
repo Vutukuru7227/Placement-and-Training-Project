@@ -1,9 +1,9 @@
 package com.jobportal.repository;
 
-import com.jobportal.models.RegistrationModel;
+import com.jobportal.models.UserModel;
 
 public interface ILogin {
 
-	public RegistrationModel authenticateUser(RegistrationModel loginModel);
+	public UserModel authenticateUser(UserModel loginModel);
 	
 }

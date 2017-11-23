@@ -1,7 +1,6 @@
 package com.jobportal.controllers.CommonController;
 
 import java.io.IOException;
-import static java.lang.System.out;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,7 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.jobportal.models.RegistrationModel;
+import com.jobportal.models.UserModel;
 import com.jobportal.services.common.RegistrationService;
 
 /**
@@ -41,7 +40,7 @@ public class Registration extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		try {
-			RegistrationModel registerationModel = new RegistrationModel();
+			UserModel registerationModel = new UserModel();
 			
 			
 			String firstname = request.getParameter("firstname");

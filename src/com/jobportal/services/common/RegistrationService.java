@@ -6,14 +6,14 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 
-import com.jobportal.models.RegistrationModel;
+import com.jobportal.models.UserModel;
 
 public class RegistrationService {
 	
 	public static Connection getConnection() throws Exception{
 		try {
 			String driver = "com.mysql.jdbc.Driver";
-			String url = "jdbc:mysql://localhost:3306/placement";
+			String url = "jdbc:mysql://localhost:3306/placement?useSSL=false";
 			String username = "root";
 			String password = "";
 			
@@ -30,7 +30,7 @@ public class RegistrationService {
 		return null;
 	}
 
-	public boolean registerUser(RegistrationModel registrationModel) {
+	public boolean registerUser(UserModel registrationModel) {
 		boolean result = false;
 		
 		String emailId = registrationModel.getEmail_id();
@@ -62,5 +62,4 @@ public class RegistrationService {
 		}	
 		return result;
 	}
-
 }

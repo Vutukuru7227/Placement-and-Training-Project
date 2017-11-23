@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.jobportal.models.RegistrationModel;
+import com.jobportal.models.UserModel;
 import com.jobportal.services.common.LoginService;
 
 import static java.lang.System.*;
@@ -30,12 +30,12 @@ public class Login extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		RegistrationModel result;
+		UserModel result;
 		try {
 			String email_id = request.getParameter("signinEmail");
 			String password = request.getParameter("signinPassword");
 			
-			RegistrationModel loginModel = new RegistrationModel();
+			UserModel loginModel = new UserModel();
 			loginModel.setEmail_id(email_id);
 			loginModel.setPassword(password);
 			

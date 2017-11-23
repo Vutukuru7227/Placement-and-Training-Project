@@ -1,6 +1,6 @@
 package com.jobportal.models;
 
-public class RegistrationModel {
+public class UserModel {
 
 	private String email_id;
 	private String first_name;
@@ -21,8 +21,6 @@ public class RegistrationModel {
 	public void setAdmin_status(String admin_status) {
 		this.admin_status = admin_status;
 	}
-	
-
 	/**
 	 * @return the member_type
 	 */

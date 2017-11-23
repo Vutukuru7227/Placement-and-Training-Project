@@ -7,7 +7,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-import com.jobportal.models.RegistrationModel;
+import com.jobportal.models.UserModel;
 import com.jobportal.repository.*;
 
 public class LoginService implements ILogin{
@@ -15,7 +15,7 @@ public class LoginService implements ILogin{
 	public static Connection getConnection() throws Exception{
 		try {
 			String driver = "com.mysql.jdbc.Driver";
-			String url = "jdbc:mysql://localhost:3306/placement";
+			String url = "jdbc:mysql://localhost:3306/placement?useSSL=false";
 			String username = "root";
 			String password = "";
 			
@@ -33,7 +33,7 @@ public class LoginService implements ILogin{
 	}
 
 	@Override
-	public RegistrationModel authenticateUser(RegistrationModel loginModel) {
+	public UserModel authenticateUser(UserModel loginModel) {
 		String dbEmailId = "";
 		String dbFirstName = "";
 		String dbLastName = "";
@@ -43,35 +43,26 @@ public class LoginService implements ILogin{
 		try {
 			
 			String email_id = loginModel.getEmail_id();
-			String password = loginModel.getPassword();
 			
-			String sql = "(select 1 from registration where email_id=? and password=?)";
-			
+			String sql = "(select * from registration where email_id=?)";
+						
 			PreparedStatement ps = getConnection().prepareStatement(sql);
 			
 			ps.setString(1, email_id);
-			ps.setString(2, password);
 			ResultSet rs = ps.executeQuery();
 			
 			
 			while(rs.next()) {
-				String userDetails = "select * from registration where email_id=? and password=?";
-				PreparedStatement psUser = getConnection().prepareStatement(userDetails);
-				psUser.setString(1, email_id);
-				psUser.setString(2, password);
-				
-				ResultSet rsUser = psUser.executeQuery();
-				
-				while(rsUser.next()) {
-					dbEmailId = rsUser.getString(1);
-					dbFirstName = rsUser.getString(2);
-					dbLastName = rsUser.getString(3);
-					dbPassword = rsUser.getString(4);
-					dbAdmin_status = rsUser.getString(5);
-					dbMember_type = rsUser.getString(6);
-				}
 
-				RegistrationModel userDetailsModel = new RegistrationModel();
+					dbEmailId = rs.getString(1);
+					dbFirstName = rs.getString(2);
+					dbLastName = rs.getString(3);
+					dbPassword = rs.getString(4);
+					dbAdmin_status = rs.getString(5);
+					dbMember_type = rs.getString(6);
+			}
+			if(dbPassword.equals(loginModel.getPassword())){
+				UserModel userDetailsModel = new UserModel();
 				userDetailsModel.setFirst_name(dbFirstName);
 				userDetailsModel.setLast_name(dbLastName);
 				userDetailsModel.setEmail_id(dbEmailId);
@@ -80,10 +71,11 @@ public class LoginService implements ILogin{
 				userDetailsModel.setMember_type(dbMember_type);
 				
 				return userDetailsModel;
-				
-			}
 			
-			return null;
+			}
+			else {
+				return null;
+			}
 				
 		}catch (Exception e) {
 			e.printStackTrace();
