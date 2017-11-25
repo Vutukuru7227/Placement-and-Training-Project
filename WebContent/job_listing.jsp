@@ -1,4 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@page import="java.sql.DriverManager"%>
 <%@page import="java.sql.Connection" %>
 <%@page import="java.sql.ResultSet" %>
@@ -86,12 +87,6 @@
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <form class="navbar-form navbar-left">
-        <div class="form-group">
-          <input type="text" class="form-control" placeholder="Search" style="border-radius: 2px" size="40px">
-        </div>
-        <button type="submit" class="btn btn-default" style="border-radius: 2px"><span class="glyphicon glyphicon-search"></span></button>
-      </form>
       <ul class="nav navbar-nav navbar-right">
         <li><a href="user_home_page.jsp">Home</a></li>
         <li><a href="#">Training</a></li>
@@ -103,50 +98,46 @@
   </div><!-- /.container-fluid -->
 </nav>
 
+<div class="container">
+	<div class="row">
+        <div class="col-md-6">
+        	<div id="custom-search-input">
+                
+                <form id="" method="GET" action="JobListings">
+                <div class="input-group col-md-12">
+                    <input type="text" id="keyword" name="keyword" value="" class="form-control input-lg" placeholder="Enter keywords to search for a job" />
+                    <span class="input-group-btn">
+                        <button class="btn btn-primary btn-lg" type="submit">
+                            <i class="glyphicon glyphicon-search"></i>
+                        </button>
+                    </span>
+                  
+                </div>
+                </form>
+            </div>
+        </div>
+	</div>
+</div>
     
 <!-- Job posting form-->
 <div id="job_listing">
     <ul>
-        <li>
-        <%
-        
-		try {
-			String driver = "com.mysql.jdbc.Driver";
-			String url = "jdbc:mysql://localhost:3306/placement";
-			String username = "root";
-			String password = "";
-		
-			Class.forName(driver);
-			
-			Connection connection = DriverManager.getConnection(url, username, password);
-			
-			String sql = "(SELECT * FROM job_postings)";
-			PreparedStatement ps = connection.prepareStatement(sql);
-			
-			ResultSet resultSet = ps.executeQuery(sql);
-			int c=1;
-			while(resultSet.next()){
-		%>
-            <a href=""><h3 style="color: blue"><%=resultSet.getString("job_title") %></h3></a>
-            <h4>Company:<%=resultSet.getString("company_name") %></h4>
-            <h4>Location: <%=resultSet.getString("location") %></h4>
-            <p>Job Description:<%=resultSet.getString("job_description") %></p>
-            <!-- <h5>Application Deadline<%=resultSet.getString("deadline") %></h5>
-             <h5>Employer Contact:<%=resultSet.getString("emp_id") %></h5> -->
-            <h6>Job Id:<%=resultSet.getString("job_id") %></h6>
+    <c:forEach items="${searchresults}" var="result">
+       <li>
+       <a href=""><h3 style="color: blue"><c:out value="${result.job_title}" /></h3></a>
+            <h4>Company:<c:out value="${result.company}" /></h4>
+            <h4>Location: <c:out value="${result.location}" /></h4>
+            <p>Job Description:<c:out value="${result.job_description}" /></p>
+            
+            <h6>Job Id:<c:out value="${result.job_id}" /></h6>
            
-         	<a href="Apply?job_id=<%=resultSet.getString("job_id") %>">
+        <a href="Apply?job_id=<c:out value="${result.job_id}" />">
         <button type="button" class="btn btn-primary" > Apply 
         </button></a>
         	
-        </li><hr id="hrline">
-        <%
-			}
-		}
-        catch(Exception e){
-        		e.printStackTrace();
-        }
-        %>
+        </li>
+        <hr id="hrline">
+     </c:forEach>
     </ul>
 </div>
 

@@ -2,14 +2,12 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%
-
 if(session.getAttribute("email_id") == null){
 	response.sendRedirect("login.jsp");
 }
 	if(session.getAttribute("member_type") == "Applicant"){
 		response.sendRedirect("unauthorized_access.jsp");
 	}
-
 %>
 <!DOCTYPE html>
 <html lang="en">
