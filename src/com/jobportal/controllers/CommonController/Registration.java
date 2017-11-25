@@ -8,7 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.jobportal.models.UserModel;
+import com.jobportal.models.EmployerModel;
+import com.jobportal.models.JobSeekerModel;
 import com.jobportal.services.common.RegistrationService;
 
 /**
@@ -40,39 +41,57 @@ public class Registration extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		try {
-			UserModel registerationModel = new UserModel();
-			
-			
-			String firstname = request.getParameter("firstname");
-			String lastname = request.getParameter("lastname");
-			String email_id = request.getParameter("signupEmail");
-			String password = request.getParameter("signupPassword");
+			RegistrationService registrationService = new RegistrationService();
+
 			String member_type = request.getParameter("member_type");
-			String type = "";
 			
 			if(member_type.equals("0")) {
-				type = "Applicant";
+				JobSeekerModel jobSeekerModel = new JobSeekerModel();
+				
+				String firstname = request.getParameter("firstname");
+				String lastname = request.getParameter("lastname");
+				String email_id = request.getParameter("signupEmail");
+				String password = request.getParameter("signupPassword");
+				String type = "Applicant";
+				
+				jobSeekerModel.setFirst_name(firstname);
+				jobSeekerModel.setLast_name(lastname);
+				jobSeekerModel.setEmail_id(email_id);
+				jobSeekerModel.setPassword(password);
+				jobSeekerModel.setMember_type(type);
+				
+				boolean result = registrationService.registerUser(jobSeekerModel);
+				
+				if(result) {
+					response.sendRedirect("success.jsp");
+				}else {
+					response.sendRedirect("error.jsp");
+				}
 			}
+			
 			else {
-				type = "Employer";
+				EmployerModel employerModel = new EmployerModel();
+				String firstname = request.getParameter("firstname");
+				String lastname = request.getParameter("lastname");
+				String email_id = request.getParameter("signupEmail");
+				String password = request.getParameter("signupPassword");
+				String type = "Employer";
+				
+				employerModel.setFirst_name(firstname);
+				employerModel.setLast_name(lastname);
+				employerModel.setEmail_id(email_id);
+				employerModel.setPassword(password);
+				employerModel.setMember_type(type);
+				
+				boolean result = registrationService.registerUser(employerModel);
+				
+				if(result) {
+					response.sendRedirect("success.jsp");
+				}else {
+					response.sendRedirect("error.jsp");
+				}
+				
 			}
-			
-			registerationModel.setFirst_name(firstname);
-			registerationModel.setLast_name(lastname);
-			registerationModel.setEmail_id(email_id);
-			registerationModel.setPassword(password);
-			registerationModel.setMember_type(type);
-			
-			
-			RegistrationService registrationService = new RegistrationService();
-			boolean result = registrationService.registerUser(registerationModel);
-			
-			if(result) {
-				response.sendRedirect("success.jsp");
-			}else {
-				response.sendRedirect("error.jsp");
-			}
-			
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

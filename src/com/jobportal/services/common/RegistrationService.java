@@ -6,7 +6,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 
-import com.jobportal.models.UserModel;
+import com.jobportal.models.EmployerModel;
+import com.jobportal.models.JobSeekerModel;
+
 
 public class RegistrationService {
 	
@@ -30,7 +32,42 @@ public class RegistrationService {
 		return null;
 	}
 
-	public boolean registerUser(UserModel registrationModel) {
+	public boolean registerUser(JobSeekerModel registrationModel) {
+		boolean result = false;
+		
+		String emailId = registrationModel.getEmail_id();
+		String password = registrationModel.getPassword();
+		String firstName = registrationModel.getFirst_name();
+		String lastName = registrationModel.getLast_name();
+		String admin_status = "0";
+		String member_type = registrationModel.getMember_type();
+		
+		String sql = "insert into registration"
+				+ "(email_id, first_name, last_name, password, admin_status, member_type) values(?,?,?,?,?,?)";
+		
+		try {
+			Connection connection = getConnection();
+			PreparedStatement ps = connection.prepareStatement(sql);
+			
+			ps.setString(1, emailId);
+			ps.setString(2, firstName);
+			ps.setString(3, lastName);
+			ps.setString(4, password);
+			ps.setString(5, admin_status);
+			ps.setString(6, member_type);
+			
+			ps.executeUpdate();
+			result = true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			result = false;
+		}	
+		return result;
+	}
+	
+	
+	
+	public boolean registerUser(EmployerModel registrationModel) {
 		boolean result = false;
 		
 		String emailId = registrationModel.getEmail_id();

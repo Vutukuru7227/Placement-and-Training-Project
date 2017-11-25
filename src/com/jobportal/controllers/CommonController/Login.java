@@ -10,7 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.jobportal.models.UserModel;
+import com.jobportal.models.EmployerModel;
+import com.jobportal.models.JobSeekerModel;
 import com.jobportal.services.common.LoginService;
 
 import static java.lang.System.*;
@@ -30,37 +31,48 @@ public class Login extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		UserModel result;
+		String member_type;
 		try {
 			String email_id = request.getParameter("signinEmail");
 			String password = request.getParameter("signinPassword");
 			
-			UserModel loginModel = new UserModel();
-			loginModel.setEmail_id(email_id);
-			loginModel.setPassword(password);
-			
 			LoginService loginService = new LoginService();
-			 result = loginService.authenticateUser(loginModel);
+			member_type = loginService.authenticateUserandSpecifyType(email_id, password);
 			
-			
-			if(result != null) {
-				HttpSession session = request.getSession();
-				session.setAttribute("email_id", result.getEmail_id());
-				session.setAttribute("username", result.getFirst_name()+" "+result.getLast_name());
-
-				if(result.getMember_type().equals("Applicant")) {
-					session.setAttribute("member_type", "Applicant");
-					RequestDispatcher dispatcher = request.getRequestDispatcher("user_home_page.jsp");
-					dispatcher.include(request, response);
-				}
-				else {
-					session.setAttribute("member_type", "Employer");
-					RequestDispatcher dispatcher = request.getRequestDispatcher("employer_home_page.jsp");
-					dispatcher.include(request, response);
-				}
-
-			}else {
+			if(member_type == null) {
 				response.sendRedirect("error.jsp");
+			}else {
+				HttpSession session = request.getSession();
+				session.setAttribute("email_id", email_id);
+				
+				if(member_type.equals("Employer")) {
+					EmployerModel result = new EmployerModel();
+					result = loginService.getEmployerDetails(email_id);
+					
+					if(result == null) {
+						response.sendRedirect("error.jsp");
+					}
+					else {
+						session.setAttribute("username", result.getFirst_name()+" "+result.getLast_name());
+						session.setAttribute("member_type", "Employer");
+						RequestDispatcher dispatcher = request.getRequestDispatcher("employer_home_page.jsp");
+						dispatcher.include(request, response);
+					}
+				}else {
+					JobSeekerModel result = new JobSeekerModel();
+					
+					result = loginService.getJobSeekerDetails(email_id);
+					
+					if(result == null) {
+						response.sendRedirect("error.jsp");
+					}
+					else {
+						session.setAttribute("username", result.getFirst_name()+" "+result.getLast_name());
+						session.setAttribute("member_type", "Applicant");
+						RequestDispatcher dispatcher = request.getRequestDispatcher("user_home_page.jsp");
+						dispatcher.include(request, response);
+					}
+				}
 			}	
 		}
 		catch (Exception e) {

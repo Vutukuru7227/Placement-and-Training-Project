@@ -7,8 +7,9 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-import com.jobportal.models.UserModel;
-import com.jobportal.repository.*;
+import com.jobportal.models.EmployerModel;
+import com.jobportal.models.JobSeekerModel;
+import com.jobportal.repository.ILogin;
 
 public class LoginService implements ILogin{
 	
@@ -32,17 +33,11 @@ public class LoginService implements ILogin{
 		return null;
 	}
 
-	@Override
-	public UserModel authenticateUser(UserModel loginModel) {
-		String dbEmailId = "";
-		String dbFirstName = "";
-		String dbLastName = "";
+	public String authenticateUserandSpecifyType(String email_id, String password) {
+		
 		String dbPassword = "";
-		String dbAdmin_status = "";
 		String dbMember_type = "";
 		try {
-			
-			String email_id = loginModel.getEmail_id();
 			
 			String sql = "(select * from registration where email_id=?)";
 						
@@ -53,25 +48,19 @@ public class LoginService implements ILogin{
 			
 			
 			while(rs.next()) {
-
-					dbEmailId = rs.getString(1);
-					dbFirstName = rs.getString(2);
-					dbLastName = rs.getString(3);
 					dbPassword = rs.getString(4);
-					dbAdmin_status = rs.getString(5);
 					dbMember_type = rs.getString(6);
 			}
-			if(dbPassword.equals(loginModel.getPassword())){
-				UserModel userDetailsModel = new UserModel();
-				userDetailsModel.setFirst_name(dbFirstName);
-				userDetailsModel.setLast_name(dbLastName);
-				userDetailsModel.setEmail_id(dbEmailId);
-				userDetailsModel.setPassword(dbPassword);
-				userDetailsModel.setAdmin_status(dbAdmin_status);
-				userDetailsModel.setMember_type(dbMember_type);
+			if(dbPassword.equals(password)){
 				
-				return userDetailsModel;
-			
+				if(dbMember_type.equals("Applicant")) {
+					System.out.println(dbMember_type);
+					return "Applicant";
+					
+				}else {
+					
+					return "Employer";
+				}		
 			}
 			else {
 				return null;
@@ -81,6 +70,68 @@ public class LoginService implements ILogin{
 			e.printStackTrace();
 			return null;
 		}		
+	}
+	
+	public EmployerModel getEmployerDetails(String email_id) {
+		String dbEmailId = "";
+		String dbFirstName = "";
+		String dbLastName = "";
+		try {
+			String sql = "(select * from registration where email_id=?)";
+			
+			PreparedStatement ps = getConnection().prepareStatement(sql);
+			
+			ps.setString(1, email_id);
+			ResultSet rs = ps.executeQuery();
+			
+			
+			while(rs.next()) {
+				dbEmailId = rs.getString(1);
+				dbFirstName = rs.getString(2);
+				dbLastName = rs.getString(3);
+			}
+			EmployerModel employerModel = new EmployerModel();
+			employerModel.setEmail_id(dbEmailId);
+			employerModel.setFirst_name(dbFirstName);
+			employerModel.setLast_name(dbLastName);
+			
+			return employerModel;
+			
+		}catch (Exception e) {
+			// TODO: handle exception
+			return null;
+		}	
+	}
+	
+	public JobSeekerModel getJobSeekerDetails(String email_id) {
+		String dbEmailId = "";
+		String dbFirstName = "";
+		String dbLastName = "";
+		try {
+			String sql = "(select * from registration where email_id=?)";
+			
+			PreparedStatement ps = getConnection().prepareStatement(sql);
+			
+			ps.setString(1, email_id);
+			ResultSet rs = ps.executeQuery();
+			
+			
+			while(rs.next()) {
+				dbEmailId = rs.getString(1);
+				dbFirstName = rs.getString(2);
+				dbLastName = rs.getString(3);
+			}
+			JobSeekerModel jobSeekerModel = new JobSeekerModel();
+			jobSeekerModel.setEmail_id(dbEmailId);
+			jobSeekerModel.setFirst_name(dbFirstName);
+			jobSeekerModel.setLast_name(dbLastName);
+			
+			return jobSeekerModel;
+			
+		}catch (Exception e) {
+			// TODO: handle exception
+			return null;
+		}	
 	}
 	
 }

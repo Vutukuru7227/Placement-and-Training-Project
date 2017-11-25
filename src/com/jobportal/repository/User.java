@@ -1,7 +1,6 @@
-package com.jobportal.models;
+package com.jobportal.repository;
 
-public class UserModel {
-
+public abstract class User {
 	private String email_id;
 	private String first_name;
 	private String last_name;
@@ -24,15 +23,11 @@ public class UserModel {
 	/**
 	 * @return the member_type
 	 */
-	public String getMember_type() {
-		return member_type;
-	}
+	public abstract String getMember_type();
 	/**
 	 * @param member_type the member_type to set
 	 */
-	public void setMember_type(String member_type) {
-		this.member_type = member_type;
-	}
+	public abstract void setMember_type(String member_type);
 	/**
 	 * @return the email_id
 	 */
