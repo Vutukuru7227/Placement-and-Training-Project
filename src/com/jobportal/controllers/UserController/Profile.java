@@ -70,6 +70,7 @@ public class Profile extends HttpServlet {
 		 	
 		    RequestDispatcher view = request.getRequestDispatcher("/user_profile.jsp");
 	        view.forward(request, response);
+	        
 	}
 
 	/**

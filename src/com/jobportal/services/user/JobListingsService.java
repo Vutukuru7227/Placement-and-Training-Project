@@ -40,8 +40,8 @@ public class JobListingsService {
 		try {
 			// We should write where email_id condition using session in the below sql command
 			PreparedStatement preparedStatement = getConnection().
-                    prepareStatement("select * from job_postings where job_title or company_name or location or job_description LIKE ?");
-            preparedStatement.setString(1, "%" + keyword + "%");
+                    prepareStatement("select * from job_postings");
+            //preparedStatement.setString(1, "%" + keyword + "%");
             ResultSet rs = preparedStatement.executeQuery();
            
             while (rs.next()) {
@@ -58,7 +58,21 @@ public class JobListingsService {
             e.printStackTrace();
         }
 		
-		return joblist;
+		List<JobPostModel> joblist2 = new ArrayList<>();
+		for(JobPostModel jpm: joblist){
+			if(jpm.getJob_title().toLowerCase().contains(keyword) || jpm.getJob_description().toLowerCase().contains(keyword)){
+				JobPostModel joblistmodel = new JobPostModel();
+                joblistmodel.setJob_id(jpm.getJob_id());
+                joblistmodel.setCompany(jpm.getCompany());
+                joblistmodel.setJob_title(jpm.getJob_title());
+                joblistmodel.setLocation(jpm.getLocation());
+                joblistmodel.setJob_description(jpm.getJob_description());
+                
+                joblist2.add(joblistmodel);
+			}
+		}
+		
+		return joblist2;
 		
 	}
 
