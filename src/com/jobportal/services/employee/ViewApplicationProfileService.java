@@ -12,6 +12,7 @@ import java.util.List;
 
 import com.jobportal.models.EducationModel;
 import com.jobportal.models.GeneralInfoModel;
+import com.jobportal.models.ProfileModel;
 import com.jobportal.models.SkillsModel;
 import com.jobportal.models.WorkExperienceModel;
 
@@ -36,115 +37,52 @@ public class ViewApplicationProfileService {
 		return null;
 	}
 	
-	public List<EducationModel> getEducationDetails(String email_id) throws Exception {
-		List<EducationModel> education = new ArrayList<>();
+	public List<ProfileModel> getProfileDetails(String email_id) throws Exception {
+		List<ProfileModel> profile = new ArrayList<>();
 		try {
-			// We should write where email_id condition using session in the below sql command
-			PreparedStatement preparedStatement = getConnection().
-                    prepareStatement("select * from user_education where email_id=?");
-            preparedStatement.setString(1, email_id);
-            ResultSet rs = preparedStatement.executeQuery();
-           
-            while (rs.next()) {
-                EducationModel edumodel = new EducationModel();
-                edumodel.setUser_id(rs.getInt("user_id"));
-                edumodel.setEmail_id(rs.getString("email_id"));
-                edumodel.setInstitution(rs.getString("institution"));
-                edumodel.setLevel(rs.getString("level"));
-                edumodel.setMajor(rs.getString("major"));
-                edumodel.setGpa(rs.getString("gpa"));
-                edumodel.setEdu_from(rs.getString("edu_from"));
-                edumodel.setEdu_to(rs.getString("edu_to"));
-                
-                education.add(edumodel);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-		
-		return education;
-		
-	}
-	
-	public List<GeneralInfoModel> getGeneralDetails(String email_id) throws Exception {
-		List<GeneralInfoModel> general = new ArrayList<>();
-		try {
-			// We should write where email_id condition using session in the below sql command
-			PreparedStatement preparedStatement = getConnection().
-                    prepareStatement("select * from user_primary where email_id=?");
-            preparedStatement.setString(1, email_id);
-            ResultSet rs = preparedStatement.executeQuery();
-           
-            while (rs.next()) {
-                GeneralInfoModel generalmodel = new GeneralInfoModel();
-                generalmodel.setUser_id(rs.getInt("user_id"));
-                generalmodel.setEmail_id(rs.getString("email_id"));
-                generalmodel.setAddress(rs.getString("address"));
-                generalmodel.setPhone_no(rs.getString("phone_no"));
-                generalmodel.setZip_code(rs.getString("zip_code"));
-                
-                general.add(generalmodel);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-		
-		return general;
-	}
-	
-	public List<WorkExperienceModel> getWorkexDetails(String email_id) throws Exception {
-		List<WorkExperienceModel> workex = new ArrayList<>();
-		try {
-			// We should write where email_id condition using session in the below sql command
-			PreparedStatement preparedStatement = getConnection().
-                    prepareStatement("select * from user_work_experience where email_id=?");
-            preparedStatement.setString(1, email_id);
-            ResultSet rs = preparedStatement.executeQuery();
-           
-            while (rs.next()) {
-                WorkExperienceModel workmodel = new WorkExperienceModel();
-                workmodel.setUser_id(rs.getInt("user_id"));
-                workmodel.setEmail_id(rs.getString("email_id"));
-                workmodel.setTitle(rs.getString("title"));
-                workmodel.setOrganization_name(rs.getString("organization_name"));
-                workmodel.setLocation(rs.getString("location"));
-                workmodel.setExp_from(rs.getString("exp_from"));
-                workmodel.setExp_to(rs.getString("exp_to"));
-                workmodel.setAchievements(rs.getString("achievements"));
-                
-                workex.add(workmodel);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-		
-		return workex;
-		
-	}
-	
-	public List<SkillsModel> getSkillDetails(String email_id) throws Exception {
-		List<SkillsModel> skills = new ArrayList<>();
-		try {
-			// We should write where email_id condition using session in the below sql command
-			PreparedStatement preparedStatement = getConnection().
-                    prepareStatement("select * from user_skills where email_id=?");
-            preparedStatement.setString(1, email_id);
-            ResultSet rs = preparedStatement.executeQuery();
-           
-            while (rs.next()) {
-                SkillsModel skillmodel = new SkillsModel();
-                skillmodel.setUser_id(rs.getInt("user_id"));
-                skillmodel.setEmail_id(rs.getString("email_id"));
-                skillmodel.setCategory(rs.getString("category"));
-                skillmodel.setSkill(rs.getString("skill"));
-               
-                skills.add(skillmodel);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-		
-		return skills;
-	}
 
+    		PreparedStatement preparedStatement = getConnection().
+    		prepareStatement("SELECT * FROM user_primary INNER JOIN user_education ON user_primary.email_id = user_education.email_id INNER JOIN user_work_experience ON user_primary.email_id = user_work_experience.email_id INNER JOIN user_skills ON user_primary.email_id = user_skills.email_id;");
+    		ResultSet rs = preparedStatement.executeQuery();
+     
+		      while (rs.next()) {
+		          GeneralInfoModel generalmodel = new GeneralInfoModel();
+		          generalmodel.setUser_id(rs.getInt("user_id"));
+		          generalmodel.setEmail_id(rs.getString("email_id"));
+		          generalmodel.setAddress(rs.getString("address"));
+		          generalmodel.setPhone_no(rs.getString("phone_no"));
+		          generalmodel.setZip_code(rs.getString("zip_code"));
+		          
+		          EducationModel educationmodel = new EducationModel();
+		          educationmodel.setInstitution(rs.getString("institution"));
+		          educationmodel.setLevel(rs.getString("level"));
+		          educationmodel.setMajor(rs.getString("major"));
+		          educationmodel.setGpa(rs.getString("gpa"));
+		          educationmodel.setEdu_from(rs.getString("edu_from"));
+		          educationmodel.setEdu_to(rs.getString("edu_to"));
+		          
+		          WorkExperienceModel workmodel = new WorkExperienceModel();
+	                workmodel.setTitle(rs.getString("title"));
+	                workmodel.setOrganization_name(rs.getString("organization_name"));
+	                workmodel.setLocation(rs.getString("location"));
+	                workmodel.setExp_from(rs.getString("exp_from"));
+	                workmodel.setExp_to(rs.getString("exp_to"));
+	                workmodel.setAchievements(rs.getString("achievements"));
+	                
+	                SkillsModel skillmodel = new SkillsModel();
+	                skillmodel.setCategory(rs.getString("category"));
+	                skillmodel.setSkill(rs.getString("skill"));
+		          
+		          ProfileModel profilemodel = new ProfileModel(generalmodel, educationmodel, workmodel, skillmodel);
+		          
+		          profile.add(profilemodel);
+		      }
+		  } catch (SQLException e) {
+		      e.printStackTrace();
+		  }
+
+		return profile;
+		
+	}
+	
 }

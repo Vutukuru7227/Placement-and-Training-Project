@@ -79,12 +79,11 @@ if(session.getAttribute("email_id") == null){
 <h4 class="text-center">General Information</h4>
 <div class="container">
   <table class="table table-bordered table-condensed" align="center" style="background-color: white; max-width: 800px">
-    <c:forEach items="${general}" var="info">
+    <c:forEach items="${profile}" var="info">
     <tr>
       <td>
-      <b>Phone No.:</b> <c:out value="${info.phone_no}" /><br>
+      <b>Phone No.:</b><c:out value="${info.phone_no}" /><br>
       <b>Address:</b> <c:out value="${info.address}" /><br>
-      
       <b>Zip Code:</b> <c:out value="${info.zip_code}" /><br>
       
     </tr>
@@ -97,7 +96,7 @@ if(session.getAttribute("email_id") == null){
 <div class="container">
 
   <table class="table table-bordered table-condensed" align="center" style="background-color: white; max-width: 800px">
-    <c:forEach items="${education}" var="edu">
+    <c:forEach items="${profile}" var="edu">
     <tr>
       <td>
       <b>School Name:</b> <c:out value="${edu.institution}" /><br>
@@ -118,7 +117,7 @@ if(session.getAttribute("email_id") == null){
 <h4 class="text-center">Work Experience Details</h4>	  
 <div class="container">
   <table class="table table-bordered table-condensed" align="center" style="background-color: white; max-width: 800px">
-    <c:forEach items="${workex}" var="work">
+    <c:forEach items="${profile}" var="work">
     <tr>
       <td>
       <c:out value="${work.title}" /><br>
@@ -138,7 +137,7 @@ if(session.getAttribute("email_id") == null){
 <h4 class="text-center">Skills</h4>	  
 <div class="container">
   <table class="table table-bordered table-condensed" align="center" style="background-color: white; max-width: 800px">
-    <c:forEach items="${skills}" var="skill">
+    <c:forEach items="${profile}" var="skill">
     <tr>
       <td>
       <b><c:out value="${skill.category}" />:</b>
