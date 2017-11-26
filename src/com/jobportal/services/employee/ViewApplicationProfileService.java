@@ -38,8 +38,8 @@ public class ViewApplicationProfileService {
 		return null;
 	}
 	
-	public List<ProfileModel> getProfileDetails(String email_id) throws Exception {
-		List<ProfileModel> profile = new ArrayList<>();
+	public List<ProfileModel> getProfileDetails(String email_id, ProfileModel profile) throws Exception {
+		List<ProfileModel> profileList = new ArrayList<>();
 		try {
 
 		//TODO: General info
@@ -132,19 +132,19 @@ public class ViewApplicationProfileService {
 				 }
 			 
 			        
-			     ProfileModel profilemodel = new ProfileModel();
-			     profilemodel.storeGeneralDetails(generalInfoList);
-			     profilemodel.storeEducationDetails(educationInfoList);
-			     profilemodel.storeWorkExperienceDetails(workExperienceInfoList);
-			     profilemodel.storeSkillDetails(skillInfoList);
+//			     ProfileModel profilemodel = new ProfileModel();
+			     profile.storeGeneralDetails(generalInfoList);
+			     profile.storeEducationDetails(educationInfoList);
+			     profile.storeWorkExperienceDetails(workExperienceInfoList);
+			     profile.storeSkillDetails(skillInfoList);
 			     
 			        
-			     profile.add(profilemodel);
+			     profileList.add(profile);
 		      
 		  } catch (SQLException e) {
 		      e.printStackTrace();
 		  }
-		return profile;
+		return profileList;
 		
 	}
 	

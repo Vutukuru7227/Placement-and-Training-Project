@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import javax.servlet.http.HttpSession;
 
+import com.jobportal.models.ProfileModel;
 import com.jobportal.services.employee.ApplicationStatusService;
 import com.jobportal.services.employee.ViewApplicationProfileService;
 
@@ -45,22 +46,23 @@ public class ViewApplicationProfile extends HttpServlet {
 		HttpSession session = request.getSession();
 		String emp_id = (String) session.getAttribute("email_id");
 		String status = request.getParameter("status");
+		ProfileModel profile = new ProfileModel();
 		 try {
-				request.setAttribute("profile", profileservice.getProfileDetails(email_id));
+				request.setAttribute("profile", profileservice.getProfileDetails(email_id,profile));
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		 		 
 		 	try {
-		 		statuservice.changeApplicationStatus(status, emp_id);
+		 		statuservice.changeApplicationStatus(status, emp_id, email_id);
 		 	} catch (Exception e) {
 		 	// TODO Auto-generated catch block
 		 		e.printStackTrace();
 		 	}
 		 		 
 		 	try {
-		 		request.setAttribute("status", statuservice.getApplicationStatus(emp_id));
+		 		request.setAttribute("status", statuservice.getApplicationStatus(emp_id, email_id));
 		 	} catch (Exception e) {
 		 		// TODO Auto-generated catch block
 		 		e.printStackTrace();

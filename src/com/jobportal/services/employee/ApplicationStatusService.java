@@ -33,12 +33,12 @@ public class ApplicationStatusService {
 		return null;
 	}
 
-	public void changeApplicationStatus(String status, String email_id) throws Exception {
+	public void changeApplicationStatus(String status, String emp_id, String email_id) throws Exception {
 		try {
 	        
 			PreparedStatement preparedStatement = getConnection().
 	                    prepareStatement("SELECT a.job_id from application_details as a join job_postings as j on a.job_id = j.job_id where j.emp_id=?");
-	        preparedStatement.setString(1, email_id);
+	        preparedStatement.setString(1, emp_id);
 	        ResultSet rs = preparedStatement.executeQuery();
 			
 	        int job_id = 0;
@@ -49,9 +49,10 @@ public class ApplicationStatusService {
 	        System.out.println(job_id);
 	        System.out.println(status);
 			PreparedStatement preparedStatement2 = getConnection().
-                    prepareStatement("update application_details set status=? where job_id=?");
+                    prepareStatement("update application_details set status=? where job_id=? and email_id=?");
 			preparedStatement2.setString(1, status);
 			preparedStatement2.setInt(2, job_id);
+			preparedStatement2.setString(3, email_id);
             preparedStatement2.executeUpdate();
            
         } catch (SQLException e) {
@@ -60,13 +61,13 @@ public class ApplicationStatusService {
 
 	}
 
-	public ArrayList<ApplicationModel> getApplicationStatus(String email_id) throws Exception {
-		ArrayList<ApplicationModel> status = new ArrayList<ApplicationModel>();
+	public ApplicationModel getApplicationStatus(String emp_id, String email_id) throws Exception {
+//		 ApplicationModel status = new ApplicationModel();
 		try {
 	        
 			PreparedStatement preparedStatement = getConnection().
 	                    prepareStatement("SELECT a.job_id from application_details as a join job_postings as j on a.job_id = j.job_id where j.emp_id=?");
-	        preparedStatement.setString(1, email_id);
+	        preparedStatement.setString(1, emp_id);
 	        ResultSet rs = preparedStatement.executeQuery();
 	        
 	        int job_id = 0;
@@ -77,9 +78,10 @@ public class ApplicationStatusService {
 	        System.out.println(job_id);
 	        
 	        PreparedStatement preparedStatement2 = getConnection().
-                    prepareStatement("select * from application_details where job_id=?");
+                    prepareStatement("select * from application_details where job_id=? and email_id=?");
 			
 			preparedStatement2.setInt(1, job_id);
+			preparedStatement2.setString(2, email_id);
 			ResultSet rs2 = preparedStatement2.executeQuery();
 	        
 			//System.out.println("check");
@@ -92,14 +94,14 @@ public class ApplicationStatusService {
 				model.setEmail_id(rs2.getString("email_id"));
 				model.setJob_id(rs2.getInt("job_id"));
 				model.setStatus(rs2.getString("status"));
-				status.add(model);
+				return model;
 			}
 	        
            
         } catch (SQLException e) {
             e.printStackTrace();
         }
-		return status;
+		return null;
 	}
 	
 	
