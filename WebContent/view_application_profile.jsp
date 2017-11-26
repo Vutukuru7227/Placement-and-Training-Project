@@ -148,5 +148,28 @@ if(session.getAttribute("email_id") == null){
 </div>
 
 
+<div class="container">
+  <h2>Update Status</h2>
+  <form method="GET" action="ViewApplicationProfile">
+    <div class="form-group">
+    <c:forEach items="${status}" var="stat">
+    <input type="text" readonly="readonly" name="email_id" placeholder="not editable"
+            value="<c:out value="${stat.email_id}" />" style="display:none;" /> <br /> 
+      <label for="status">Change Application Status:</label>
+      <select class="form-control" id="status" name="status">	
+      <option value="<c:out value="${stat.status}" />"><c:out value="${stat.status}" /></option>
+        <option value="PENDING">PENDING</option>
+        <option value="ACCEPTED">ACCEPTED</option>
+        <option value="REJECTED">REJECTED</option>
+      </select>
+    </c:forEach>  
+      <button type="submit" class="btn btn-success">Save</button>
+      
+    </div>
+  </form>
+</div>
+
+
+
 </body>
 </html>

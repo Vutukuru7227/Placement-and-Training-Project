@@ -8,7 +8,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import com.jobportal.services.employee.ApplicationStatusService;
 import com.jobportal.services.user.EducationService;
 import com.jobportal.services.user.GeneralInfoService;
 import com.jobportal.services.user.SkillsService;
@@ -24,6 +26,7 @@ public class ViewApplicationProfile extends HttpServlet {
 	private GeneralInfoService general;
 	private WorkExperienceService workservice;
 	private SkillsService skills;
+	private ApplicationStatusService statuservice;
 	
     /**
      * @see HttpServlet#HttpServlet()
@@ -35,6 +38,7 @@ public class ViewApplicationProfile extends HttpServlet {
         general = new GeneralInfoService();
         workservice = new WorkExperienceService();
         skills = new SkillsService();
+        statuservice = new ApplicationStatusService();
     }
 
 	/**
@@ -42,6 +46,10 @@ public class ViewApplicationProfile extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String email_id = request.getParameter("email_id");
+		System.out.println(email_id);
+		HttpSession session = request.getSession();
+        String emp_id = (String) session.getAttribute("email_id");
+		String status = request.getParameter("status");
 		 try {
 				request.setAttribute("education", eduservice.getEducationDetails(email_id));
 			} catch (Exception e) {
@@ -66,6 +74,21 @@ public class ViewApplicationProfile extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		 
+		 try {
+				statuservice.changeApplicationStatus(status, emp_id);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		 
+		 try {
+				request.setAttribute("status", statuservice.getApplicationStatus(emp_id));
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		 
 		 	
 		    RequestDispatcher view = request.getRequestDispatcher("/view_application_profile.jsp");
 	        view.forward(request, response);
