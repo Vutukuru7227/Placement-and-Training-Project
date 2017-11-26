@@ -60,7 +60,7 @@ public class JobListingsService {
 		
 		List<JobPostModel> joblist2 = new ArrayList<>();
 		for(JobPostModel jpm: joblist){
-			if(jpm.getJob_title().toLowerCase().contains(keyword) || jpm.getJob_description().toLowerCase().contains(keyword)){
+			if(jpm.getJob_title().contains(keyword) || jpm.getJob_description().toLowerCase().contains(keyword)){
 				JobPostModel joblistmodel = new JobPostModel();
                 joblistmodel.setJob_id(jpm.getJob_id());
                 joblistmodel.setCompany(jpm.getCompany());

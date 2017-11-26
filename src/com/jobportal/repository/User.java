@@ -6,7 +6,6 @@ public abstract class User {
 	private String last_name;
 	private String password;
 	private String admin_status;
-	private String member_type;
 	
 	/**
 	 * @return the admin_status
