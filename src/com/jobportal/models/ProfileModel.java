@@ -5,8 +5,6 @@ import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.Set;
 
-import com.mysql.fabric.xmlrpc.base.Array;
-
 public class ProfileModel {
 	
 	public ProfileModel(GeneralInfoModel generalmodel, EducationModel educationmodel, WorkExperienceModel workmodel, SkillsModel skillmodel) {

@@ -59,8 +59,12 @@
       </form>-->
       <ul class="nav navbar-nav navbar-right">
         <li><a href="user_home_page.jsp">Home</a></li>
-        <li><a href="#">Training</a></li>
         <li><a href="job_listing.jsp">Jobs</a></li>
+        <% 
+        		String email_id = session.getAttribute("email_id").toString();
+         		request.setAttribute("email_id", email_id);
+         	%>
+         <li><a href="ViewApplicationsStatus?email_id=<%=email_id %>">View Applications</a></li>
 		<li><a href="user_account.jsp">Account</a></li>
 		<li><a href="logout.jsp">Logout</a></li>
         
