@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 24, 2017 at 04:15 AM
+-- Generation Time: Nov 26, 2017 at 06:41 AM
 -- Server version: 10.1.19-MariaDB
 -- PHP Version: 5.6.28
 
@@ -28,16 +28,17 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `application_details` (
   `email_id` varchar(200) NOT NULL,
-  `job_id` int(11) NOT NULL
+  `job_id` int(11) NOT NULL,
+  `status` enum('PENDING','ACCEPTED','REJECTED') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `application_details`
 --
 
-INSERT INTO `application_details` (`email_id`, `job_id`) VALUES
-('ram@gmail.com', 1),
-('ram@gmail.com', 2);
+INSERT INTO `application_details` (`email_id`, `job_id`, `status`) VALUES
+('ram@gmail.com', 1, 'PENDING'),
+('ram@gmail.com', 2, 'ACCEPTED');
 
 -- --------------------------------------------------------
 
@@ -100,7 +101,7 @@ CREATE TABLE `registration` (
 
 INSERT INTO `registration` (`email_id`, `first_name`, `last_name`, `password`, `admin_status`, `member_type`) VALUES
 ('kmreddyhyd@gmail.com', 'Manohar', 'Katam', 'qwerty', 0, 'Applicant'),
-('mano@gmail.com', 'Manohar', 'Katam', '123456', 0, 'Employer'),
+('mano@gmail.com', 'Manohar', 'Katam', '123456', 1, 'Employer'),
 ('manohar@gmail.com', 'Manohar', 'Katam', '123456', 0, 'Employer'),
 ('ram@gmail.com', 'Ram', 'Anand', '123456', 0, 'Applicant');
 
@@ -126,9 +127,8 @@ CREATE TABLE `user_education` (
 --
 
 INSERT INTO `user_education` (`user_id`, `email_id`, `institution`, `level`, `gpa`, `major`, `edu_from`, `edu_to`) VALUES
-(3, 'ram@gmail.com', 'University of Texas at Dallas', 'Master of Science', 3.904, 'Computer Science', 2016, 2018),
-(4, 'kmreddyhyd@gmail.com', 'IIST', 'Bachelors', 3.71, 'Electronics', 2011, 2015),
-(9, 'ram@gmail.com', 'IIST', 'Bachelors', 3.71, 'Electronics', 2011, 2015);
+(3, 'ram@gmail.com', 'University of Texas at Dallas', 'Master of Science', 3.905, 'Computer Science', 2016, 2018),
+(4, 'kmreddyhyd@gmail.com', 'IIST', 'Bachelors', 3.71, 'Electronics', 2011, 2015);
 
 -- --------------------------------------------------------
 
@@ -149,7 +149,7 @@ CREATE TABLE `user_primary` (
 --
 
 INSERT INTO `user_primary` (`user_id`, `email_id`, `address`, `phone_no`, `zip_code`) VALUES
-(1, 'ram@gmail.com', '7575 Frankford Rd, Apt 2923', '6822569203', '75252');
+(1, 'ram@gmail.com', '7575 Frankford Rd, Apt 2923', '6822569202', '75252');
 
 -- --------------------------------------------------------
 
@@ -169,9 +169,7 @@ CREATE TABLE `user_skills` (
 --
 
 INSERT INTO `user_skills` (`user_id`, `email_id`, `category`, `skill`) VALUES
-(1, 'ram@gmail.com', 'Programming', 'Java'),
-(4, 'ram@gmail.com', 'Programming', 'PHP'),
-(5, 'ram@gmail.com', 'Databases', 'MySQL');
+(1, 'ram@gmail.com', 'Programming', 'Java/J2EE');
 
 -- --------------------------------------------------------
 
@@ -195,8 +193,7 @@ CREATE TABLE `user_work_experience` (
 --
 
 INSERT INTO `user_work_experience` (`user_id`, `email_id`, `title`, `organization_name`, `location`, `exp_from`, `exp_to`, `achievements`) VALUES
-(1, 'ram@gmail.com', 'Software Developer', 'ISRO', 'Bangalore', 2015, 2017, 'aaaaa'),
-(4, 'ram@gmail.com', 'Web Developer', 'University of Texas at Dallas', 'Dallas', 2017, 2017, 'Web Page');
+(1, 'ram@gmail.com', 'Software Developer', 'ISRO', 'Bangalore', 2015, 2017, 'aaaaa');
 
 --
 -- Indexes for dumped tables
@@ -280,12 +277,12 @@ ALTER TABLE `user_education`
 -- AUTO_INCREMENT for table `user_primary`
 --
 ALTER TABLE `user_primary`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `user_skills`
 --
 ALTER TABLE `user_skills`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `user_work_experience`
 --
