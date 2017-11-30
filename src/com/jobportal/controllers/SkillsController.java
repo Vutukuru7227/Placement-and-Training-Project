@@ -11,22 +11,21 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.jobportal.models.SkillsModel;
-import com.jobportal.services.user.SkillsService;
-
+import com.jobportal.services.DBMngr;
 /**
  * Servlet implementation class Skills
  */
 @WebServlet("/Skills")
-public class Skills extends HttpServlet {
+public class SkillsController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    private SkillsService skills;
+    private DBMngr skills;
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Skills() {
+    public SkillsController() {
         super();
         // TODO Auto-generated constructor stub
-        skills = new SkillsService();
+        skills = new DBMngr();
     }
 
 	/**

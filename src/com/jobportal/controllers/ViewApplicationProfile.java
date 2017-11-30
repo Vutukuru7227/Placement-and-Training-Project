@@ -12,8 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.jobportal.models.ProfileModel;
-import com.jobportal.services.employee.ApplicationStatusService;
-import com.jobportal.services.employee.ViewApplicationProfileService;
+import com.jobportal.services.DBMngr;
 
 
 /**
@@ -22,8 +21,8 @@ import com.jobportal.services.employee.ViewApplicationProfileService;
 @WebServlet("/ViewApplicationProfile")
 public class ViewApplicationProfile extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private ViewApplicationProfileService profileservice;
-	private ApplicationStatusService statuservice;
+	private DBMngr profileservice;
+	private DBMngr statuservice;
 
 	
     /**
@@ -32,8 +31,8 @@ public class ViewApplicationProfile extends HttpServlet {
     public ViewApplicationProfile() {
         super();
         // TODO Auto-generated constructor stub
-        profileservice = new ViewApplicationProfileService();
-        statuservice = new ApplicationStatusService();
+        profileservice = new DBMngr();
+        statuservice = new DBMngr();
 
     }
 

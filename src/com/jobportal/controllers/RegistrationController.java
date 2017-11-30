@@ -10,19 +10,18 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.jobportal.models.EmployerModel;
 import com.jobportal.models.JobSeekerModel;
-import com.jobportal.services.common.RegistrationService;
-
+import com.jobportal.services.DBMngr;
 /**
  * Servlet implementation class registration
  */
 @WebServlet("/Registration")
-public class Registration extends HttpServlet {
+public class RegistrationController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Registration() {
+    public RegistrationController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -41,7 +40,7 @@ public class Registration extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		try {
-			RegistrationService registrationService = new RegistrationService();
+			DBMngr registrationService = new DBMngr();
 
 			String member_type = request.getParameter("member_type");
 			

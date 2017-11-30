@@ -9,15 +9,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.jobportal.services.user.ViewApplicationsStatusService;
-
+import com.jobportal.services.DBMngr;
 /**
  * Servlet implementation class ViewApplicationsStatus
  */
 @WebServlet("/ViewApplicationsStatus")
 public class ViewApplicationsStatus extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private ViewApplicationsStatusService applications;
+	private DBMngr applications;
 	
        
     /**
@@ -25,7 +24,7 @@ public class ViewApplicationsStatus extends HttpServlet {
      */
     public ViewApplicationsStatus() {
         super();
-        applications = new ViewApplicationsStatusService();
+        applications = new DBMngr();
         // TODO Auto-generated constructor stub
     }
 

@@ -12,25 +12,25 @@ import javax.servlet.http.HttpSession;
 
 import com.jobportal.models.EducationModel;
 import com.jobportal.models.WorkExperienceModel;
-import com.jobportal.services.user.EducationService;
+import com.jobportal.services.DBMngr;
 
 /**
  * Servlet implementation class Education
  */
 @WebServlet("/Education")
-public class Education extends HttpServlet {
+public class EducationController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
-    private EducationService eduservice;
+    private DBMngr eduservice;
 
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Education() {
+    public EducationController() {
         super();
         // TODO Auto-generated constructor stub
-        eduservice = new EducationService();
+        eduservice = new DBMngr();
     }
 
 	/**

@@ -11,25 +11,24 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.jobportal.models.WorkExperienceModel;
-import com.jobportal.services.user.WorkExperienceService;
-
+import com.jobportal.services.DBMngr;
 /**
  * Servlet implementation class WorkExperience
  */
 @WebServlet("/WorkExperience")
-public class WorkExperience extends HttpServlet {
+public class WorkExperienceController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
-    private WorkExperienceService workservice;
+    private DBMngr workservice;
 
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public WorkExperience() {
+    public WorkExperienceController() {
         super();
         // TODO Auto-generated constructor stub
-        workservice = new WorkExperienceService();
+        workservice = new DBMngr();
     }
 
 	/**

@@ -18,19 +18,18 @@ import javax.servlet.http.HttpServletResponse;
 import javax.sql.rowset.Joinable;
 
 import com.jobportal.models.JobPostModel;
-import com.jobportal.services.employee.JobPostingService;
-
+import com.jobportal.services.DBMngr;
 /**
  * Servlet implementation class JobPosting
  */
 @WebServlet("/JobPosting")
-public class JobPosting extends HttpServlet {
+public class JobPostingController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public JobPosting() {
+    public JobPostingController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -41,7 +40,7 @@ public class JobPosting extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		out.println("Reached here with emp id "+request.getParameter("emp_id"));
-		JobPostingService jobListingService = new JobPostingService();
+		DBMngr jobListingService = new DBMngr();
 		ArrayList<JobPostModel> jobs = new ArrayList<JobPostModel>();
 		
 		try {
@@ -82,7 +81,7 @@ public class JobPosting extends HttpServlet {
 			jobPostModel.setCompany(company);
 			jobPostModel.setLocation(location);
 			jobPostModel.setEmp_id(emp_id);
-			JobPostingService jobPostingService = new JobPostingService();
+			DBMngr jobPostingService = new DBMngr();
 			boolean result = jobPostingService.postJob(jobPostModel);
 			PrintWriter out = response.getWriter();
 			if(result) {

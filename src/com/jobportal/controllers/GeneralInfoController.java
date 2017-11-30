@@ -11,23 +11,22 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.jobportal.models.GeneralInfoModel;
-import com.jobportal.services.user.GeneralInfoService;
-
+import com.jobportal.services.DBMngr;
 /**
  * Servlet implementation class GeneralInfo
  */
 @WebServlet("/GeneralInfo")
-public class GeneralInfo extends HttpServlet {
+public class GeneralInfoController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private GeneralInfoService general;
+	private DBMngr general;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GeneralInfo() {
+    public GeneralInfoController() {
         super();
         // TODO Auto-generated constructor stub
-        general = new GeneralInfoService();
+        general = new DBMngr();
     }
 
 	/**

@@ -10,20 +10,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.jobportal.services.user.EducationService;
-import com.jobportal.services.user.GeneralInfoService;
-import com.jobportal.services.user.SkillsService;
-import com.jobportal.services.user.WorkExperienceService;
+import com.jobportal.services.DBMngr;
 
 /**
  * Servlet implementation class Profile
  */
 @WebServlet("/Profile")
 public class Profile extends HttpServlet {
-	private EducationService eduservice;   
-	private GeneralInfoService general;
-	private WorkExperienceService workservice;
-	private SkillsService skills;
+	private DBMngr eduservice;   
+	private DBMngr general;
+	private DBMngr workservice;
+	private DBMngr skills;
 	
     /**
      * @see HttpServlet#HttpServlet()
@@ -31,10 +28,10 @@ public class Profile extends HttpServlet {
     public Profile() {
         super();
         // TODO Auto-generated constructor stub
-        eduservice = new EducationService();
-        general = new GeneralInfoService();
-        workservice = new WorkExperienceService();
-        skills = new SkillsService();
+        eduservice = new DBMngr();
+        general = new DBMngr();
+        workservice = new DBMngr();
+        skills = new DBMngr();
     }
 
 	/**

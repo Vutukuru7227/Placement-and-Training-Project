@@ -9,22 +9,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.jobportal.services.user.JobListingsService;
-
+import com.jobportal.services.DBMngr;
 /**
  * Servlet implementation class JobListings
  */
 @WebServlet("/JobListings")
-public class JobListings extends HttpServlet {
+public class JobListingsController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private JobListingsService joblistservice;
+	private DBMngr joblistservice;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public JobListings() {
+    public JobListingsController() {
         super();
-        joblistservice = new JobListingsService();
+        joblistservice = new DBMngr();
         // TODO Auto-generated constructor stub
     }
 

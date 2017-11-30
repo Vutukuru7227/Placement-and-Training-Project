@@ -12,15 +12,14 @@ import javax.servlet.http.HttpSession;
 
 import com.jobportal.models.EmployerModel;
 import com.jobportal.models.JobSeekerModel;
-import com.jobportal.services.common.LoginService;
-
+import com.jobportal.services.DBMngr;
 import static java.lang.System.*;
 
 /**
  * Servlet implementation class Login
  */
 @WebServlet("/Login")
-public class Login extends HttpServlet {
+public class LoginController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
       
 
@@ -36,7 +35,7 @@ public class Login extends HttpServlet {
 			String email_id = request.getParameter("signinEmail");
 			String password = request.getParameter("signinPassword");
 			
-			LoginService loginService = new LoginService();
+			DBMngr loginService = new DBMngr();
 			member_type = loginService.authenticateUserandSpecifyType(email_id, password);
 			
 			if(member_type == null) {

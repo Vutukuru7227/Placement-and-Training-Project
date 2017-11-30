@@ -11,19 +11,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.jobportal.models.ApplicationModel;
-import com.jobportal.services.employee.JobPostingService;
-
+import com.jobportal.services.DBMngr;
 /**
  * Servlet implementation class ViewJobs
  */
 @WebServlet("/ViewJobs")
-public class ViewJobs extends HttpServlet {
+public class ViewJobsController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ViewJobs() {
+    public ViewJobsController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,7 +34,7 @@ public class ViewJobs extends HttpServlet {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		
-		JobPostingService service = new JobPostingService();
+		DBMngr service = new DBMngr();
 		ArrayList<ApplicationModel> appliedList = new ArrayList<>();
 		
 		appliedList = service.viewSpecificJobPosted(Integer.parseInt(request.getParameter("job_id")));

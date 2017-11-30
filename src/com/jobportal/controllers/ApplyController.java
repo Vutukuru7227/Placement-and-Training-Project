@@ -11,19 +11,19 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.jobportal.models.ApplicationModel;
-import com.jobportal.services.user.ApplyService;
+import com.jobportal.services.DBMngr;
 
 /**
  * Servlet implementation class Apply
  */
 @WebServlet("/Apply")
-public class Apply extends HttpServlet {
+public class ApplyController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Apply() {
+    public ApplyController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -42,7 +42,7 @@ public class Apply extends HttpServlet {
 		model.setJob_id(job_id);
 		model.setEmail_id(email_id);
 		
-		ApplyService applyService = new ApplyService();
+		DBMngr applyService = new DBMngr();
 		boolean result = applyService.Apply(model);
 		if(result){
 			RequestDispatcher dispatcher = request.getRequestDispatcher("apply_success.jsp");
