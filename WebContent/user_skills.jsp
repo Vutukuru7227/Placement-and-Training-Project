@@ -98,7 +98,7 @@
 	  <h2>Add/Edit Your Skills</h2>
 	  
 	  <div class="container">
-	  <form id="" method="POST" action="Skills">
+	  <form id="" method="POST" action="ProfileController?controller=Skills">
 	  	  <input type="text" readonly="readonly" name="user_id" placeholder="not editable"
             value="<c:out value="${skillmodel.user_id}" />" style="display:none;"/> <br /> 
              	

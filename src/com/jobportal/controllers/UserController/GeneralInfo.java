@@ -37,8 +37,12 @@ public class GeneralInfo extends HttpServlet {
 		String forward="";
 		//System.out.println(request.getParameter("user_id"));
         String action = request.getParameter("action");
+        //String model = request.getParameter("model");
         HttpSession session = request.getSession();
 		String email_id = (String) session.getAttribute("email_id");
+		
+		//if(model.equalsIgnoreCase("general")){
+		
         if (action.equalsIgnoreCase("delete")){
             int userId = Integer.parseInt(request.getParameter("userId"));
             try {
@@ -68,6 +72,8 @@ public class GeneralInfo extends HttpServlet {
         }else {
             forward = "/user_general.jsp";
         }
+        
+//		}
 
         RequestDispatcher view = request.getRequestDispatcher(forward);
         view.forward(request, response);

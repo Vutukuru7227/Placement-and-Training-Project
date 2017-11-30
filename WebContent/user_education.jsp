@@ -98,7 +98,7 @@
 	  <h2>Add/Edit Education Details</h2>
 	  
 	  <div class="container">
-	  <form id="" method="POST" action="Education">
+	  <form id="" method="POST" action="ProfileController?controller=Education">
 	  	  <input type="text" readonly="readonly" name="user_id" placeholder="not editable"
             value="<c:out value="${edumodel.user_id}" />" style="display:none;" /> <br /> 
              	
