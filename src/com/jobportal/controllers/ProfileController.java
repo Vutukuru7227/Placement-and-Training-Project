@@ -1,4 +1,4 @@
-package com.jobportal.controllers.UserController;
+package com.jobportal.controllers;
 
 import java.io.IOException;
 
@@ -8,24 +8,20 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import com.jobportal.services.user.ViewApplicationsStatusService;
+import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class ViewApplicationsStatus
+ * Servlet implementation class ProfileController
  */
-@WebServlet("/ViewApplicationsStatus")
-public class ViewApplicationsStatus extends HttpServlet {
+@WebServlet("/ProfileController")
+public class ProfileController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private ViewApplicationsStatusService applications;
-	
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ViewApplicationsStatus() {
+    public ProfileController() {
         super();
-        applications = new ViewApplicationsStatusService();
         // TODO Auto-generated constructor stub
     }
 
@@ -33,17 +29,24 @@ public class ViewApplicationsStatus extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String email_id = request.getParameter("email_id");
-		
-		try {
-			request.setAttribute("applications", applications.getApplications(email_id));
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		RequestDispatcher view = request.getRequestDispatcher("/view_applications.jsp");
+		String forward="";
+		//System.out.println(request.getParameter("user_id"));
+        String controller = request.getParameter("controller");
+        
+        if (controller.equalsIgnoreCase("Education")){
+            
+            forward = "/Education";
+        }else if(controller.equalsIgnoreCase("GeneralInfo")){
+        	forward = "/GeneralInfo";
+        }else if(controller.equalsIgnoreCase("WorkExperience")){
+        	forward = "/WorkExperience";
+        }else if(controller.equalsIgnoreCase("Skills")){
+        	forward = "/Skills";
+        }
+        
+        RequestDispatcher view = request.getRequestDispatcher(forward);
         view.forward(request, response);
+        
 	}
 
 	/**

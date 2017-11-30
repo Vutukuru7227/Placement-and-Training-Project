@@ -2,7 +2,6 @@ package com.jobportal.models;
 
 import java.util.Date;
 
-
 public class JobPostModel {
 	private int job_id;
 	private String emp_id;

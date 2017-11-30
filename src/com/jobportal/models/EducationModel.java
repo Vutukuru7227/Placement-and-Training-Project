@@ -58,9 +58,5 @@ public class EducationModel {
 	}
 	public void setEdu_to(String edu_to) {
 		this.edu_to = edu_to;
-	}
-	
-	
-	
-	
+	}	
 }

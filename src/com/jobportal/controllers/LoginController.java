@@ -1,4 +1,4 @@
-package com.jobportal.controllers.CommonController;
+package com.jobportal.controllers;
 
 import java.io.IOException;
 

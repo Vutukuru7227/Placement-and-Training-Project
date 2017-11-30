@@ -3,14 +3,12 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <%
-
 	if(session.getAttribute("email_id") == null){
 		response.sendRedirect("login.jsp");
 	}
 	if(session.getAttribute("member_type") == "Employer"){
 		response.sendRedirect("unauthorized_access.jsp");
 	}
-
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -99,7 +97,7 @@
 <h4 class="text-center">General Information</h4>
 <div class="container">
 <span style="float: right;">
-<a href="GeneralInfo?action=insert">
+<a href="ProfileController?controller=GeneralInfo&action=insert">
         <button type="button" class="btn btn-primary">Add General Info
         </button></a>
       </span>
@@ -114,12 +112,12 @@
       
       </td>
         <td><span style="float: right;">
-        <a href="GeneralInfo?action=edit&userId=<c:out value="${info.user_id}"/>">
+        <a href="ProfileController?controller=GeneralInfo&action=edit&userId=<c:out value="${info.user_id}"/>">
         <button type="button" class="btn btn-primary glyphicon glyphicon-pencil" >
         </button></a>
       </span></td>
       <td><span style="float: right;">
-      <a href="GeneralInfo?action=delete&userId=<c:out value="${info.user_id}"/>">
+      <a href="ProfileController?controller=GeneralInfo&action=delete&userId=<c:out value="${info.user_id}"/>">
         <button type="button" class="btn btn-danger glyphicon glyphicon-trash">
         </button></a>
       </span></td>
@@ -133,7 +131,7 @@
 <h4 class="text-center">Education Details</h4>
 <div class="container">
 <span style="float: right;">
-<a href="Education?action=insert">
+<a href="ProfileController?controller=Education&action=insert">
         <button type="button" class="btn btn-primary">Add Education
         </button></a>
       </span>
@@ -150,12 +148,12 @@
       <c:out value="${edu.edu_to}" />
       </td>
         <td><span style="float: right;">
-        <a href="Education?action=edit&userId=<c:out value="${edu.user_id}"/>">
+        <a href="ProfileController?controller=Education&action=edit&userId=<c:out value="${edu.user_id}"/>">
         <button type="button" class="btn btn-primary glyphicon glyphicon-pencil" >
         </button></a>
       </span></td>
       <td><span style="float: right;">
-      <a href="Education?action=delete&userId=<c:out value="${edu.user_id}"/>">
+      <a href="ProfileController?controller=Education&action=delete&userId=<c:out value="${edu.user_id}"/>">
         <button type="button" class="btn btn-danger glyphicon glyphicon-trash">
         </button></a>
       </span></td>
@@ -169,7 +167,7 @@
 <h4 class="text-center">Work Experience Details</h4>	  
 <div class="container">
 <span style="float: right;">
-<a href="WorkExperience?action=insert">
+<a href="ProfileController?controller=WorkExperience&action=insert">
         <button type="button" class="btn btn-primary">Add Work Experience
         </button></a>
       </span>
@@ -185,12 +183,12 @@
       <c:out value="${work.achievements}" />
       </td>
         <td><span style="float: right;">
-        <a href="WorkExperience?action=edit&userId=<c:out value="${work.user_id}"/>">
+        <a href="ProfileController?controller=WorkExperience&action=edit&userId=<c:out value="${work.user_id}"/>">
         <button type="button" class="btn btn-primary glyphicon glyphicon-pencil" >
         </button></a>
       </span></td>
       <td><span style="float: right;">
-      <a href="WorkExperience?action=delete&userId=<c:out value="${work.user_id}"/>">
+      <a href="ProfileController?controller=WorkExperience&action=delete&userId=<c:out value="${work.user_id}"/>">
         <button type="button" class="btn btn-danger glyphicon glyphicon-trash">
         </button></a>
       </span></td>
@@ -217,12 +215,12 @@
       
       </td>
         <td><span style="float: right;">
-        <a href="Skills?action=edit&userId=<c:out value="${skill.user_id}"/>">
+        <a href="ProfileController?controller=Skills&action=edit&userId=<c:out value="${skill.user_id}"/>">
         <button type="button" class="btn btn-primary glyphicon glyphicon-pencil" >
         </button></a>
       </span></td>
       <td><span style="float: right;">
-      <a href="Skills?action=delete&userId=<c:out value="${skill.user_id}"/>">
+      <a href="ProfileController?controller=Skills&action=delete&userId=<c:out value="${skill.user_id}"/>">
         <button type="button" class="btn btn-danger glyphicon glyphicon-trash">
         </button></a>
       </span></td>

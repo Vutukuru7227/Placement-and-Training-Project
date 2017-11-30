@@ -1,4 +1,4 @@
-package com.jobportal.controllers.Employeecontroller;
+package com.jobportal.controllers;
 
 import java.io.IOException;
 import java.io.PrintWriter;

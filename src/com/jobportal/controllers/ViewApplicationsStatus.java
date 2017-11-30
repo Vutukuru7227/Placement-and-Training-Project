@@ -1,4 +1,4 @@
-package com.jobportal.controllers.UserController;
+package com.jobportal.controllers;
 
 import java.io.IOException;
 
@@ -9,22 +9,23 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.jobportal.services.user.JobListingsService;
+import com.jobportal.services.user.ViewApplicationsStatusService;
 
 /**
- * Servlet implementation class JobListings
+ * Servlet implementation class ViewApplicationsStatus
  */
-@WebServlet("/JobListings")
-public class JobListings extends HttpServlet {
+@WebServlet("/ViewApplicationsStatus")
+public class ViewApplicationsStatus extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private JobListingsService joblistservice;
+	private ViewApplicationsStatusService applications;
+	
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public JobListings() {
+    public ViewApplicationsStatus() {
         super();
-        joblistservice = new JobListingsService();
+        applications = new ViewApplicationsStatusService();
         // TODO Auto-generated constructor stub
     }
 
@@ -32,16 +33,16 @@ public class JobListings extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String keyword = request.getParameter("keyword");
+		String email_id = request.getParameter("email_id");
 		
 		try {
-			request.setAttribute("searchresults", joblistservice.getJobListings(keyword));
+			request.setAttribute("applications", applications.getApplications(email_id));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		RequestDispatcher view = request.getRequestDispatcher("/job_listing.jsp");
+		RequestDispatcher view = request.getRequestDispatcher("/view_applications.jsp");
         view.forward(request, response);
 	}
 

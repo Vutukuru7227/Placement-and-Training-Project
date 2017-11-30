@@ -1,23 +1,29 @@
-package com.jobportal.controllers.Employeecontroller;
+package com.jobportal.controllers;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.jobportal.models.ApplicationModel;
+import com.jobportal.services.employee.JobPostingService;
+
 /**
- * Servlet implementation class ViewApplications
+ * Servlet implementation class ViewJobs
  */
-@WebServlet("/ViewApplications")
-public class ViewApplications extends HttpServlet {
+@WebServlet("/ViewJobs")
+public class ViewJobs extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ViewApplications() {
+    public ViewJobs() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,7 +35,13 @@ public class ViewApplications extends HttpServlet {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		
-		System.out.println("Reached here with Job_id:"+request.getParameter("job_id"));
+		JobPostingService service = new JobPostingService();
+		ArrayList<ApplicationModel> appliedList = new ArrayList<>();
+		
+		appliedList = service.viewSpecificJobPosted(Integer.parseInt(request.getParameter("job_id")));
+		request.setAttribute("appliedList", appliedList);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("view_applied_list.jsp");
+		dispatcher.include(request, response);
 	}
 
 	/**

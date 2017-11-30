@@ -1,4 +1,4 @@
-package com.jobportal.controllers.UserController;
+package com.jobportal.controllers;
 
 import java.io.IOException;
 
@@ -10,24 +10,23 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.jobportal.models.GeneralInfoModel;
-import com.jobportal.services.user.GeneralInfoService;
+import com.jobportal.models.SkillsModel;
+import com.jobportal.services.user.SkillsService;
 
 /**
- * Servlet implementation class GeneralInfo
+ * Servlet implementation class Skills
  */
-@WebServlet("/GeneralInfo")
-public class GeneralInfo extends HttpServlet {
+@WebServlet("/Skills")
+public class Skills extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private GeneralInfoService general;
-       
+    private SkillsService skills;
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GeneralInfo() {
+    public Skills() {
         super();
         // TODO Auto-generated constructor stub
-        general = new GeneralInfoService();
+        skills = new SkillsService();
     }
 
 	/**
@@ -38,35 +37,35 @@ public class GeneralInfo extends HttpServlet {
 		//System.out.println(request.getParameter("user_id"));
         String action = request.getParameter("action");
         HttpSession session = request.getSession();
-		String email_id = (String) session.getAttribute("email_id");
+        String email_id = (String) session.getAttribute("email_id");
         if (action.equalsIgnoreCase("delete")){
             int userId = Integer.parseInt(request.getParameter("userId"));
             try {
-            	general.deleteGeneralInfo(userId);
+            	skills.deleteSkill(userId);
 			} catch (Exception e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
             forward = "/user_account.jsp";
             try {
-				request.setAttribute("general", general.getGeneralDetails(email_id));
+				request.setAttribute("skills", skills.getSkillDetails(email_id));
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}    
         } else if (action.equalsIgnoreCase("edit")){
-            forward = "/user_general.jsp";
+            forward = "/user_skills.jsp";
             int userId = Integer.parseInt(request.getParameter("userId"));
-            GeneralInfoModel generalmodel = new GeneralInfoModel();
+            SkillsModel skillmodel = null;
 			try {
-				generalmodel = general.editGeneralInfo(userId);
+				skillmodel = skills.editSkill(userId);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-            request.setAttribute("generalmodel", generalmodel);
+            request.setAttribute("skillmodel", skillmodel);
         }else {
-            forward = "/user_general.jsp";
+            forward = "/user_skills.jsp";
         }
 
         RequestDispatcher view = request.getRequestDispatcher(forward);
@@ -77,28 +76,28 @@ public class GeneralInfo extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		GeneralInfoModel generalmodel = new GeneralInfoModel();
+		SkillsModel skillmodel = new SkillsModel();
 		HttpSession session = request.getSession();
 		String email_id = (String) session.getAttribute("email_id");
-		generalmodel.setEmail_id((String) session.getAttribute("email_id"));
-		generalmodel.setAddress(request.getParameter("address"));
-		generalmodel.setPhone_no(request.getParameter("phone_no"));
-		generalmodel.setZip_code(request.getParameter("zip_code"));
+		skillmodel.setEmail_id((String) session.getAttribute("email_id"));
+		skillmodel.setCategory(request.getParameter("category"));
+		skillmodel.setSkill(request.getParameter("skill"));
+		
 		
 		String userid = request.getParameter("user_id");
         if(userid == null || userid.isEmpty())
         {
             try {
-            	general.addGeneralInfo(generalmodel);
+				skills.addSkill(skillmodel);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
         }else
         {
-        	generalmodel.setUser_id(Integer.parseInt(userid));
+        	skillmodel.setUser_id(Integer.parseInt(userid));
             try {
-            	general.updateGeneralInfo(generalmodel);
+            	skills.updateSkill(skillmodel);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -107,7 +106,7 @@ public class GeneralInfo extends HttpServlet {
         
         RequestDispatcher view = request.getRequestDispatcher("/user_account.jsp");
         try {
-			request.setAttribute("general", general.getGeneralDetails(email_id));
+			request.setAttribute("skills", skills.getSkillDetails(email_id));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -116,6 +115,4 @@ public class GeneralInfo extends HttpServlet {
        
 		
 	}
-
-
 }

@@ -3,14 +3,12 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <%
-
 	if(session.getAttribute("email_id") == null){
 		response.sendRedirect("login.jsp");
 	}
 	if(session.getAttribute("member_type") == "Employer"){
 		response.sendRedirect("unauthorized_access.jsp");
 	}
-
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -98,7 +96,7 @@
 	  <h2>Add/Edit Education Details</h2>
 	  
 	  <div class="container">
-	  <form id="" method="POST" action="Education">
+	  <form id="" method="POST" action="ProfileController?controller=Education">
 	  	  <input type="text" readonly="readonly" name="user_id" placeholder="not editable"
             value="<c:out value="${edumodel.user_id}" />" style="display:none;" /> <br /> 
              	

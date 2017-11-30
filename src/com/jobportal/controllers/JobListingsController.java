@@ -1,7 +1,6 @@
-package com.jobportal.controllers.Employeecontroller;
+package com.jobportal.controllers;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,21 +9,22 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.jobportal.models.ApplicationModel;
-import com.jobportal.services.employee.JobPostingService;
+import com.jobportal.services.user.JobListingsService;
 
 /**
- * Servlet implementation class ViewJobs
+ * Servlet implementation class JobListings
  */
-@WebServlet("/ViewJobs")
-public class ViewJobs extends HttpServlet {
+@WebServlet("/JobListings")
+public class JobListings extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private JobListingsService joblistservice;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ViewJobs() {
+    public JobListings() {
         super();
+        joblistservice = new JobListingsService();
         // TODO Auto-generated constructor stub
     }
 
@@ -32,16 +32,17 @@ public class ViewJobs extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		//response.getWriter().append("Served at: ").append(request.getContextPath());
+		String keyword = request.getParameter("keyword");
 		
-		JobPostingService service = new JobPostingService();
-		ArrayList<ApplicationModel> appliedList = new ArrayList<>();
+		try {
+			request.setAttribute("searchresults", joblistservice.getJobListings(keyword));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
-		appliedList = service.viewSpecificJobPosted(Integer.parseInt(request.getParameter("job_id")));
-		request.setAttribute("appliedList", appliedList);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("view_applied_list.jsp");
-		dispatcher.include(request, response);
+		RequestDispatcher view = request.getRequestDispatcher("/job_listing.jsp");
+        view.forward(request, response);
 	}
 
 	/**
